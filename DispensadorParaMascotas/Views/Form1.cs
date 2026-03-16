@@ -14,39 +14,75 @@ namespace DispensadorParaMascotas
         }
 
         private double _porcentajeComida = 0.725; // 1.45kg de 2.0kg = 72.5%
+        private double _nivelDeposito = 0.85;     // 85% de capacidad total del tanque
 
         private void pnlContenido_Paint(object sender, PaintEventArgs e)
         {
             Graphics g = e.Graphics;
-            g.SmoothingMode = SmoothingMode.AntiAlias; // Para que no se vea "pixelado"
+            g.SmoothingMode = SmoothingMode.AntiAlias;
 
-            // Definimos el área del círculo (centrado en el panel)
-            int diametro = 250;
-            int x = (pnlContenido.Width - diametro) / 2;
-            int y = (pnlContenido.Height - diametro) / 2 - 20; // Un poco arriba del centro
-            Rectangle rect = new Rectangle(x, y, diametro, diametro);
+            // --- DIMENSIONES ---
+            int diametroInterno = 250;
+            int xInt = (pnlContenido.Width - diametroInterno) / 2;
+            int yInt = (pnlContenido.Height - diametroInterno) / 2 - 20;
+            Rectangle rectInterno = new Rectangle(xInt, yInt, diametroInterno, diametroInterno);
 
-            // 1. Dibujar el fondo del círculo (Gris más claro)
+            // Usamos margenExtra para que el código sea dinámico
+            int margenExtra = 40;
+            Rectangle rectExterior = new Rectangle(
+                xInt - (margenExtra / 2),
+                yInt - (margenExtra / 2),
+                diametroInterno + margenExtra,
+                diametroInterno + margenExtra
+            );
+
+            // --- 1. LÓGICA DEL CÍRCULO EXTERIOR (PLATEADO) ---
+            // Definimos los colores para el efecto "Plata"
+            Color colorPlataFondo = Color.FromArgb(60, 192, 192, 192); // Plata translúcido
+            Color colorPlataSolido = Color.FromArgb(200, 200, 200);   // Plata sólido
+
+            // CAMBIO DE COLOR DINÁMICO: Si el depósito está bajo (< 15%)
+            if (_nivelDeposito < 0.15)
+            {
+                colorPlataSolido = Color.FromArgb(255, 80, 80); // Cambia a un rojo suave de alerta
+            }
+
+            // Dibujar fondo del anillo exterior
+            using (Pen penFondoExt = new Pen(colorPlataFondo, 6))
+            {
+                g.DrawEllipse(penFondoExt, rectExterior);
+            }
+
+            // Dibujar progreso del anillo exterior
+            float sweepExterior = (float)(_nivelDeposito * 360);
+            using (Pen penPlata = new Pen(colorPlataSolido, 6))
+            {
+                penPlata.StartCap = LineCap.Round;
+                penPlata.EndCap = LineCap.Round;
+                g.DrawArc(penPlata, rectExterior, -90, sweepExterior);
+            }
+
+            // --- 2. CÍRCULO INTERNO (TU PETRONAS ORIGINAL) ---
+            // Fondo gris del panel
             using (Pen penFondo = new Pen(Color.FromArgb(45, 45, 48), 15))
             {
-                g.DrawEllipse(penFondo, rect);
+                g.DrawEllipse(penFondo, rectInterno);
             }
 
-            // 2. Dibujar el Brillo Neón (Glow) Aqua
-            // Calculamos el ángulo: 360 grados * porcentaje
-            float sweepAngle = (float)(_porcentajeComida * 360);
+            float sweepInterno = (float)(_porcentajeComida * 360);
 
-            using (Pen penGlow = new Pen(Color.FromArgb(50, 0, 161, 155), 22))
+            // Glow Petronas
+            using (Pen penGlow = new Pen(Color.FromArgb(40, 0, 161, 155), 22))
             {
-                g.DrawArc(penGlow, rect, -90, sweepAngle);
+                g.DrawArc(penGlow, rectInterno, -90, sweepInterno);
             }
 
-            // 3. Dibujar el arco principal (Aqua Petronas sólido)
+            // Arco Petronas Sólido
             using (Pen penAqua = new Pen(Color.FromArgb(0, 161, 155), 15))
             {
                 penAqua.StartCap = LineCap.Round;
                 penAqua.EndCap = LineCap.Round;
-                g.DrawArc(penAqua, rect, -90, sweepAngle);
+                g.DrawArc(penAqua, rectInterno, -90, sweepInterno);
             }
         }
 
