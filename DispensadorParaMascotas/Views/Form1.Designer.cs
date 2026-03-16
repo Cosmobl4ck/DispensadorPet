@@ -29,16 +29,20 @@
         private void InitializeComponent()
         {
             flowLayoutPanel1 = new FlowLayoutPanel();
-            panel1 = new Panel();
-            lblNivel = new Label();
-            lblMensaje = new Label();
-            txtGramos = new TextBox();
             btnInicio = new DispensadorParaMascotas.Views.MenuButton();
             btnProgramacion = new DispensadorParaMascotas.Views.MenuButton();
             btnHistorial = new DispensadorParaMascotas.Views.MenuButton();
             btnConfiguracion = new DispensadorParaMascotas.Views.MenuButton();
             btnUsuario = new DispensadorParaMascotas.Views.MenuButton();
+            panel1 = new Panel();
+            lblKilos = new Label();
+            lblCapacidad = new Label();
+            pnlContenido = new Panel();
+            picMascota = new PictureBox();
+            dispensarButton1 = new DispensadorParaMascotas.Views.dispensarButton();
             flowLayoutPanel1.SuspendLayout();
+            pnlContenido.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)picMascota).BeginInit();
             SuspendLayout();
             // 
             // flowLayoutPanel1
@@ -55,43 +59,6 @@
             flowLayoutPanel1.Padding = new Padding(0, 60, 0, 0);
             flowLayoutPanel1.Size = new Size(238, 600);
             flowLayoutPanel1.TabIndex = 0;
-            // 
-            // panel1
-            // 
-            panel1.BackColor = Color.Silver;
-            panel1.Dock = DockStyle.Bottom;
-            panel1.Location = new Point(238, 590);
-            panel1.Name = "panel1";
-            panel1.Size = new Size(862, 10);
-            panel1.TabIndex = 1;
-            // 
-            // lblNivel
-            // 
-            lblNivel.AutoSize = true;
-            lblNivel.ForeColor = SystemColors.ButtonFace;
-            lblNivel.Location = new Point(996, 32);
-            lblNivel.Name = "lblNivel";
-            lblNivel.Size = new Size(50, 20);
-            lblNivel.TabIndex = 2;
-            lblNivel.Text = "label1";
-            // 
-            // lblMensaje
-            // 
-            lblMensaje.AutoSize = true;
-            lblMensaje.ForeColor = SystemColors.ButtonFace;
-            lblMensaje.Location = new Point(996, 88);
-            lblMensaje.Name = "lblMensaje";
-            lblMensaje.Size = new Size(50, 20);
-            lblMensaje.TabIndex = 3;
-            lblMensaje.Text = "label1";
-            // 
-            // txtGramos
-            // 
-            txtGramos.ForeColor = SystemColors.ButtonFace;
-            txtGramos.Location = new Point(921, 136);
-            txtGramos.Name = "txtGramos";
-            txtGramos.Size = new Size(125, 27);
-            txtGramos.TabIndex = 4;
             // 
             // btnInicio
             // 
@@ -178,37 +145,104 @@
             btnUsuario.TextAlign = ContentAlignment.MiddleLeft;
             btnUsuario.UseVisualStyleBackColor = false;
             // 
+            // panel1
+            // 
+            panel1.BackColor = Color.Silver;
+            panel1.Dock = DockStyle.Bottom;
+            panel1.Location = new Point(238, 590);
+            panel1.Name = "panel1";
+            panel1.Size = new Size(862, 10);
+            panel1.TabIndex = 1;
+            // 
+            // lblKilos
+            // 
+            lblKilos.AutoSize = true;
+            lblKilos.Font = new Font("Segoe UI", 25.8000011F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            lblKilos.ForeColor = SystemColors.ButtonFace;
+            lblKilos.Location = new Point(464, 274);
+            lblKilos.Name = "lblKilos";
+            lblKilos.Size = new Size(175, 60);
+            lblKilos.TabIndex = 2;
+            lblKilos.Text = "1.45 kg";
+            // 
+            // lblCapacidad
+            // 
+            lblCapacidad.AutoSize = true;
+            lblCapacidad.ForeColor = SystemColors.ButtonFace;
+            lblCapacidad.Location = new Point(525, 334);
+            lblCapacidad.Name = "lblCapacidad";
+            lblCapacidad.Size = new Size(58, 20);
+            lblCapacidad.TabIndex = 3;
+            lblCapacidad.Text = "/ 2.0 kg";
+            // 
+            // pnlContenido
+            // 
+            pnlContenido.Controls.Add(picMascota);
+            pnlContenido.Controls.Add(lblKilos);
+            pnlContenido.Controls.Add(lblCapacidad);
+            pnlContenido.Controls.Add(dispensarButton1);
+            pnlContenido.Dock = DockStyle.Fill;
+            pnlContenido.Location = new Point(0, 0);
+            pnlContenido.Name = "pnlContenido";
+            pnlContenido.Size = new Size(1100, 600);
+            pnlContenido.TabIndex = 5;
+            pnlContenido.Paint += pnlContenido_Paint;
+            // 
+            // picMascota
+            // 
+            picMascota.Location = new Point(909, 39);
+            picMascota.Name = "picMascota";
+            picMascota.Size = new Size(116, 132);
+            picMascota.TabIndex = 4;
+            picMascota.TabStop = false;
+            // 
+            // dispensarButton1
+            // 
+            dispensarButton1.BackColor = Color.FromArgb(45, 45, 48);
+            dispensarButton1.FlatAppearance.BorderSize = 0;
+            dispensarButton1.FlatStyle = FlatStyle.Flat;
+            dispensarButton1.Font = new Font("Segoe UI Semibold", 11F);
+            dispensarButton1.ForeColor = Color.White;
+            dispensarButton1.Location = new Point(440, 477);
+            dispensarButton1.Name = "dispensarButton1";
+            dispensarButton1.Size = new Size(225, 62);
+            dispensarButton1.TabIndex = 0;
+            dispensarButton1.Text = "Dispensar";
+            dispensarButton1.UseVisualStyleBackColor = false;
+            // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(26, 26, 27);
             ClientSize = new Size(1100, 600);
-            Controls.Add(txtGramos);
-            Controls.Add(lblMensaje);
-            Controls.Add(lblNivel);
             Controls.Add(panel1);
             Controls.Add(flowLayoutPanel1);
+            Controls.Add(pnlContenido);
             FormBorderStyle = FormBorderStyle.None;
             Name = "Form1";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Form1";
             flowLayoutPanel1.ResumeLayout(false);
+            pnlContenido.ResumeLayout(false);
+            pnlContenido.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)picMascota).EndInit();
             ResumeLayout(false);
-            PerformLayout();
         }
 
         #endregion
 
         private FlowLayoutPanel flowLayoutPanel1;
         private Panel panel1;
-        private Label lblNivel;
-        private Label lblMensaje;
-        private TextBox txtGramos;
+        private Label lblKilos;
+        private Label lblCapacidad;
         private Views.MenuButton btnInicio;
         private Views.MenuButton btnProgramacion;
         private Views.MenuButton btnHistorial;
         private Views.MenuButton btnConfiguracion;
         private Views.MenuButton btnUsuario;
+        private Panel pnlContenido;
+        private Views.dispensarButton dispensarButton1;
+        private PictureBox picMascota;
     }
 }
