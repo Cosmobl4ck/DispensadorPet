@@ -89,9 +89,14 @@ namespace DispensadorParaMascotas
         private void ConfigurarFotoPug()
         {
             GraphicsPath path = new GraphicsPath();
-            path.AddEllipse(0, 0, picMascota.Width, picMascota.Height);
-            picMascota.Region = new Region(path);
-            picMascota.SizeMode = PictureBoxSizeMode.Zoom;
+            path.AddEllipse(0, 0, pbMascota.Width, pbMascota.Height);
+            pbMascota.Region = new Region(path);
+            pbMascota.SizeMode = PictureBoxSizeMode.Zoom;
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }
