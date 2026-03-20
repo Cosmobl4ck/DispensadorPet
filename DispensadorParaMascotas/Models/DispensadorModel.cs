@@ -6,8 +6,28 @@ namespace DispensadorParaMascotas.Model
 {
     internal class DispensadorModel
     {
-        public double CapacidadMaxima { get; set; } = 2.0; // En kg
-        public double NivelActual { get; set; } = 2.0;     // Empieza lleno
+        private double _capacidadMaxima = 2.0;
+        public double CapacidadMaxima
+        {
+            get { return _capacidadMaxima; }
+            set
+            {
+                if (value > 0)
+                    _capacidadMaxima = value;
+            }
+        }
+
+        private double _nivelActual = 2.0;
+        public double NivelActual
+        {
+            get { return _nivelActual; }
+            set
+            {
+                if (value >= 0 && value <= CapacidadMaxima)
+                    _nivelActual = value;
+            }
+        }
+        
 
         public double ObtenerPorcentaje()
         {
