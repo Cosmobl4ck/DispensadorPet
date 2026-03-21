@@ -1,4 +1,6 @@
+using System.Drawing;
 using System.Drawing.Drawing2D;
+using DispensadorParaMascotas.Views;
 
 namespace DispensadorParaMascotas
 {
@@ -8,10 +10,13 @@ namespace DispensadorParaMascotas
         {
             InitializeComponent();
             this.DoubleBuffered = true;
-
             pnlHeader.Paint += pnlHeader_Paint;
             pnlContenido.Invalidate();
         }
+
+        private enum Vista { Inicio, Programacion }
+        private Vista _vistaActual = Vista.Inicio;
+        private ProgramacionView _programacionView;
 
         private double _kilosActuales = 1.45;
         private double _capacidadTotal = 2.0;
@@ -25,13 +30,39 @@ namespace DispensadorParaMascotas
         {
             ConfigurarFotoPug();
             ReposicionarControles();
+
+            _programacionView = new ProgramacionView { Visible = false };
+            pnlContenido.Controls.Add(_programacionView);
+            pnlHeader.BringToFront();
+
+            btnInicio.Click += (s, ev) => MostrarVista(Vista.Inicio);
+            btnProgramacion.Click += (s, ev) => MostrarVista(Vista.Programacion);
+        }
+
+        private void MostrarVista(Vista vista)
+        {
+            _vistaActual = vista;
+
+            bool esInicio = vista == Vista.Inicio;
+            lblKilos.Visible = esInicio;
+            lblCapacidad.Visible = esInicio;
+            lblNivelComida.Visible = esInicio;
+            dispensarButton1.Visible = esInicio;
+            _programacionView.Visible = vista == Vista.Programacion;
+
+            btnInicio.ForeColor = esInicio ? Color.FromArgb(0, 210, 200) : Color.Silver;
+            btnProgramacion.ForeColor = vista == Vista.Programacion ? Color.FromArgb(0, 210, 200) : Color.Silver;
+            btnHistorial.ForeColor = Color.Silver;
+            btnConfiguracion.ForeColor = Color.Silver;
+            btnUsuario.ForeColor = Color.Silver;
+
+            pnlContenido.Invalidate();
         }
 
         private void ReposicionarControles()
         {
-            // Centro real del área de contenido
             int cx = pnlContenido.Width / 2;
-            int cy = pnlContenido.Height / 2;
+            int cy = pnlContenido.Height / 2 - 40;
 
             lblKilos.Left = cx - lblKilos.Width / 2;
             lblKilos.Top = cy - 32;
@@ -43,7 +74,7 @@ namespace DispensadorParaMascotas
             lblNivelComida.Top = cy + 48;
 
             dispensarButton1.Left = cx - dispensarButton1.Width / 2;
-            dispensarButton1.Top = cy + 150;
+            dispensarButton1.Top = cy + 175;
 
             pnlHeader.Left = pnlContenido.Width - pnlHeader.Width - 20;
             pnlHeader.Top = 16;
@@ -51,11 +82,13 @@ namespace DispensadorParaMascotas
 
         private void pnlContenido_Paint(object sender, PaintEventArgs e)
         {
+            if (_vistaActual != Vista.Inicio) return;
+
             Graphics g = e.Graphics;
             g.SmoothingMode = SmoothingMode.AntiAlias;
 
             int cx = pnlContenido.Width / 2;
-            int cy = pnlContenido.Height / 2;
+            int cy = pnlContenido.Height / 2 - 40;
 
             // --- DIMENSIONES ---
             int diametroInterno = 240;
@@ -174,15 +207,12 @@ namespace DispensadorParaMascotas
                     g.DrawPath(border, path);
             }
 
-            // Borde circular alrededor de la foto
             Point ptPhoto = pnlHeader.PointToClient(pbMascota.PointToScreen(Point.Empty));
             int margin = 3;
             using (Pen circlePen = new Pen(Color.FromArgb(0, 175, 165), 2.5f))
                 g.DrawEllipse(circlePen,
-                    ptPhoto.X - margin,
-                    ptPhoto.Y - margin,
-                    pbMascota.Width + margin * 2,
-                    pbMascota.Height + margin * 2);
+                    ptPhoto.X - margin, ptPhoto.Y - margin,
+                    pbMascota.Width + margin * 2, pbMascota.Height + margin * 2);
         }
 
         private void ConfigurarFotoPug()

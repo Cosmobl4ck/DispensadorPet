@@ -67,7 +67,7 @@
             pnlTitleBar.Dock = DockStyle.Top;
             pnlTitleBar.Location = new Point(0, 0);
             pnlTitleBar.Name = "pnlTitleBar";
-            pnlTitleBar.Size = new Size(1100, 32);
+            pnlTitleBar.Size = new Size(1280, 32);
             pnlTitleBar.TabIndex = 6;
             pnlTitleBar.MouseDown += pnlTitleBar_MouseDown;
             pnlTitleBar.MouseMove += pnlTitleBar_MouseMove;
@@ -79,7 +79,7 @@
             lblTitulo.ForeColor = Color.Silver;
             lblTitulo.Location = new Point(0, 0);
             lblTitulo.Name = "lblTitulo";
-            lblTitulo.Size = new Size(1008, 32);
+            lblTitulo.Size = new Size(1188, 32);
             lblTitulo.TabIndex = 0;
             lblTitulo.Text = "SmartPet Dispenser v1.0";
             lblTitulo.TextAlign = ContentAlignment.MiddleCenter;
@@ -95,7 +95,7 @@
             btnCerrar.FlatStyle = FlatStyle.Flat;
             btnCerrar.Font = new Font("Segoe UI", 9F);
             btnCerrar.ForeColor = Color.Silver;
-            btnCerrar.Location = new Point(1008, 0);
+            btnCerrar.Location = new Point(1188, 0);
             btnCerrar.Name = "btnCerrar";
             btnCerrar.Size = new Size(46, 32);
             btnCerrar.TabIndex = 2;
@@ -112,7 +112,7 @@
             btnMinimizar.FlatStyle = FlatStyle.Flat;
             btnMinimizar.Font = new Font("Segoe UI", 9F);
             btnMinimizar.ForeColor = Color.Silver;
-            btnMinimizar.Location = new Point(1054, 0);
+            btnMinimizar.Location = new Point(1234, 0);
             btnMinimizar.Name = "btnMinimizar";
             btnMinimizar.Size = new Size(46, 32);
             btnMinimizar.TabIndex = 1;
@@ -133,7 +133,7 @@
             flowLayoutPanel1.Margin = new Padding(3, 2, 3, 2);
             flowLayoutPanel1.Name = "flowLayoutPanel1";
             flowLayoutPanel1.Padding = new Padding(0, 45, 0, 0);
-            flowLayoutPanel1.Size = new Size(220, 568);
+            flowLayoutPanel1.Size = new Size(220, 688);
             flowLayoutPanel1.TabIndex = 0;
             // 
             // btnInicio
@@ -230,10 +230,10 @@
             // 
             panel1.BackColor = Color.Silver;
             panel1.Dock = DockStyle.Bottom;
-            panel1.Location = new Point(220, 592);
+            panel1.Location = new Point(220, 712);
             panel1.Margin = new Padding(3, 2, 3, 2);
             panel1.Name = "panel1";
-            panel1.Size = new Size(880, 8);
+            panel1.Size = new Size(1060, 8);
             panel1.TabIndex = 1;
             // 
             // lblKilos
@@ -242,7 +242,7 @@
             lblKilos.BackColor = Color.Transparent;
             lblKilos.Font = new Font("Segoe UI", 25.8000011F, FontStyle.Bold, GraphicsUnit.Point, 0);
             lblKilos.ForeColor = Color.White;
-            lblKilos.Location = new Point(406, 206);
+            lblKilos.Location = new Point(413, 158);
             lblKilos.Name = "lblKilos";
             lblKilos.Size = new Size(141, 47);
             lblKilos.TabIndex = 2;
@@ -254,7 +254,7 @@
             lblCapacidad.BackColor = Color.Transparent;
             lblCapacidad.Font = new Font("Segoe UI", 9F);
             lblCapacidad.ForeColor = Color.FromArgb(180, 180, 180);
-            lblCapacidad.Location = new Point(459, 250);
+            lblCapacidad.Location = new Point(466, 202);
             lblCapacidad.Name = "lblCapacidad";
             lblCapacidad.Size = new Size(46, 15);
             lblCapacidad.TabIndex = 3;
@@ -266,7 +266,7 @@
             lblNivelComida.BackColor = Color.Transparent;
             lblNivelComida.Font = new Font("Segoe UI", 7.5F);
             lblNivelComida.ForeColor = Color.FromArgb(120, 120, 120);
-            lblNivelComida.Location = new Point(406, 270);
+            lblNivelComida.Location = new Point(413, 222);
             lblNivelComida.Name = "lblNivelComida";
             lblNivelComida.Size = new Size(126, 12);
             lblNivelComida.TabIndex = 8;
@@ -305,10 +305,10 @@
             pnlContenido.Controls.Add(lblNivelComida);
             pnlContenido.Controls.Add(dispensarButton1);
             pnlContenido.Dock = DockStyle.Fill;
-            pnlContenido.Location = new Point(0, 32);
+            pnlContenido.Location = new Point(220, 32);
             pnlContenido.Margin = new Padding(3, 2, 3, 2);
             pnlContenido.Name = "pnlContenido";
-            pnlContenido.Size = new Size(1100, 568);
+            pnlContenido.Size = new Size(1060, 688);
             pnlContenido.TabIndex = 5;
             pnlContenido.Paint += pnlContenido_Paint;
             // 
@@ -316,7 +316,7 @@
             // 
             pnlHeader.BackColor = Color.Transparent;
             pnlHeader.Controls.Add(tableLayoutPanel1);
-            pnlHeader.Location = new Point(570, 16);
+            pnlHeader.Location = new Point(740, 16);
             pnlHeader.Name = "pnlHeader";
             pnlHeader.Size = new Size(290, 95);
             pnlHeader.TabIndex = 5;
@@ -354,6 +354,7 @@
             // dispensarButton1
             // 
             dispensarButton1.BackColor = Color.FromArgb(45, 45, 48);
+            dispensarButton1.FlatAppearance.BorderColor = Color.FromArgb(0, 0, 0, 0);
             dispensarButton1.FlatAppearance.BorderSize = 0;
             dispensarButton1.FlatStyle = FlatStyle.Flat;
             dispensarButton1.Font = new Font("Segoe UI Semibold", 11F);
@@ -363,6 +364,7 @@
             dispensarButton1.Name = "dispensarButton1";
             dispensarButton1.Size = new Size(210, 48);
             dispensarButton1.TabIndex = 0;
+            dispensarButton1.TabStop = false;
             dispensarButton1.Text = "Dispensar";
             dispensarButton1.UseVisualStyleBackColor = false;
             dispensarButton1.Click += dispensarButton1_Click;
@@ -372,10 +374,10 @@
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(26, 26, 27);
-            ClientSize = new Size(1100, 600);
+            ClientSize = new Size(1280, 720);
             Controls.Add(panel1);
-            Controls.Add(flowLayoutPanel1);
             Controls.Add(pnlContenido);
+            Controls.Add(flowLayoutPanel1);
             Controls.Add(pnlTitleBar);
             FormBorderStyle = FormBorderStyle.None;
             Margin = new Padding(3, 2, 3, 2);

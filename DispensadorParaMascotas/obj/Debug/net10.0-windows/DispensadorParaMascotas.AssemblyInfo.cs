@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("DispensadorParaMascotas")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+c584a2972476990e93025e73f14410e27916d01b")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+98c467d6a5e75795cec177917709a2b6b81cecb1")]
 [assembly: System.Reflection.AssemblyProductAttribute("DispensadorParaMascotas")]
 [assembly: System.Reflection.AssemblyTitleAttribute("DispensadorParaMascotas")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
