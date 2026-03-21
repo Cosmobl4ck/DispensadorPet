@@ -12,9 +12,8 @@
       }
     ],
     "additionalProbingPaths": [
-      "C:\\Users\\Cosmoblack\\.dotnet\\store\\|arch|\\|tfm|",
-      "C:\\Users\\Cosmoblack\\.nuget\\packages",
-      "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+      "C:\\Users\\PC GAMER\\.dotnet\\store\\|arch|\\|tfm|",
+      "C:\\Users\\PC GAMER\\.nuget\\packages"
     ],
     "configProperties": {
       "System.Runtime.Serialization.EnableUnsafeBinaryFormatterSerialization": false,
