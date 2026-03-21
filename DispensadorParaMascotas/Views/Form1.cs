@@ -1,3 +1,4 @@
+using DispensadorParaMascotas.Controllers;
 using System.Drawing.Drawing2D;
 
 namespace DispensadorParaMascotas
@@ -92,6 +93,33 @@ namespace DispensadorParaMascotas
             path.AddEllipse(0, 0, picMascota.Width, picMascota.Height);
             picMascota.Region = new Region(path);
             picMascota.SizeMode = PictureBoxSizeMode.Zoom;
+        }
+
+        private void flowLayoutPanel1_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void btnUsuario_Click(object sender, EventArgs e)
+        {
+            pnlContenido.Controls.Clear();
+
+            var form = new MascotaForm();
+            var controller = new MascotaController(form);
+
+            form.TopLevel = false;
+            form.FormBorderStyle = FormBorderStyle.None;
+            form.Dock = DockStyle.Fill;
+
+            // 🔥 ESCUCHAR CUANDO QUIERA VOLVER
+            form.VolverInicioSolicitado += (s, ev) =>
+            {
+                pnlContenido.Controls.Clear();
+                pnlContenido.Invalidate();
+            };
+
+            pnlContenido.Controls.Add(form);
+            form.Show();
         }
     }
 }

@@ -55,23 +55,27 @@
             flowLayoutPanel1.Controls.Add(btnUsuario);
             flowLayoutPanel1.Dock = DockStyle.Left;
             flowLayoutPanel1.Location = new Point(0, 0);
+            flowLayoutPanel1.Margin = new Padding(3, 2, 3, 2);
             flowLayoutPanel1.Name = "flowLayoutPanel1";
-            flowLayoutPanel1.Padding = new Padding(0, 60, 0, 0);
-            flowLayoutPanel1.Size = new Size(238, 600);
+            flowLayoutPanel1.Padding = new Padding(0, 45, 0, 0);
+            flowLayoutPanel1.Size = new Size(208, 450);
             flowLayoutPanel1.TabIndex = 0;
+            flowLayoutPanel1.Paint += flowLayoutPanel1_Paint;
             // 
             // btnInicio
             // 
             btnInicio.BackColor = Color.Transparent;
             btnInicio.Dock = DockStyle.Top;
+            btnInicio.Enabled = false;
             btnInicio.FlatAppearance.BorderSize = 0;
             btnInicio.FlatStyle = FlatStyle.Flat;
             btnInicio.Font = new Font("Segoe UI", 10F);
             btnInicio.ForeColor = Color.Silver;
-            btnInicio.Location = new Point(3, 63);
+            btnInicio.Location = new Point(3, 47);
+            btnInicio.Margin = new Padding(3, 2, 3, 2);
             btnInicio.Name = "btnInicio";
-            btnInicio.Padding = new Padding(20, 0, 0, 0);
-            btnInicio.Size = new Size(250, 62);
+            btnInicio.Padding = new Padding(18, 0, 0, 0);
+            btnInicio.Size = new Size(190, 46);
             btnInicio.TabIndex = 0;
             btnInicio.Text = "Inicio";
             btnInicio.TextAlign = ContentAlignment.MiddleLeft;
@@ -81,14 +85,16 @@
             // 
             btnProgramacion.BackColor = Color.Transparent;
             btnProgramacion.Dock = DockStyle.Top;
+            btnProgramacion.Enabled = false;
             btnProgramacion.FlatAppearance.BorderSize = 0;
             btnProgramacion.FlatStyle = FlatStyle.Flat;
             btnProgramacion.Font = new Font("Segoe UI", 10F);
             btnProgramacion.ForeColor = Color.Silver;
-            btnProgramacion.Location = new Point(3, 131);
+            btnProgramacion.Location = new Point(3, 97);
+            btnProgramacion.Margin = new Padding(3, 2, 3, 2);
             btnProgramacion.Name = "btnProgramacion";
-            btnProgramacion.Padding = new Padding(20, 0, 0, 0);
-            btnProgramacion.Size = new Size(250, 62);
+            btnProgramacion.Padding = new Padding(18, 0, 0, 0);
+            btnProgramacion.Size = new Size(190, 46);
             btnProgramacion.TabIndex = 1;
             btnProgramacion.Text = "Programacion";
             btnProgramacion.TextAlign = ContentAlignment.MiddleLeft;
@@ -98,14 +104,16 @@
             // 
             btnHistorial.BackColor = Color.Transparent;
             btnHistorial.Dock = DockStyle.Top;
+            btnHistorial.Enabled = false;
             btnHistorial.FlatAppearance.BorderSize = 0;
             btnHistorial.FlatStyle = FlatStyle.Flat;
             btnHistorial.Font = new Font("Segoe UI", 10F);
             btnHistorial.ForeColor = Color.Silver;
-            btnHistorial.Location = new Point(3, 199);
+            btnHistorial.Location = new Point(3, 147);
+            btnHistorial.Margin = new Padding(3, 2, 3, 2);
             btnHistorial.Name = "btnHistorial";
-            btnHistorial.Padding = new Padding(20, 0, 0, 0);
-            btnHistorial.Size = new Size(250, 62);
+            btnHistorial.Padding = new Padding(18, 0, 0, 0);
+            btnHistorial.Size = new Size(190, 46);
             btnHistorial.TabIndex = 2;
             btnHistorial.Text = "Historial";
             btnHistorial.TextAlign = ContentAlignment.MiddleLeft;
@@ -115,14 +123,16 @@
             // 
             btnConfiguracion.BackColor = Color.Transparent;
             btnConfiguracion.Dock = DockStyle.Top;
+            btnConfiguracion.Enabled = false;
             btnConfiguracion.FlatAppearance.BorderSize = 0;
             btnConfiguracion.FlatStyle = FlatStyle.Flat;
             btnConfiguracion.Font = new Font("Segoe UI", 10F);
             btnConfiguracion.ForeColor = Color.Silver;
-            btnConfiguracion.Location = new Point(3, 267);
+            btnConfiguracion.Location = new Point(3, 197);
+            btnConfiguracion.Margin = new Padding(3, 2, 3, 2);
             btnConfiguracion.Name = "btnConfiguracion";
-            btnConfiguracion.Padding = new Padding(20, 0, 0, 0);
-            btnConfiguracion.Size = new Size(250, 62);
+            btnConfiguracion.Padding = new Padding(18, 0, 0, 0);
+            btnConfiguracion.Size = new Size(190, 46);
             btnConfiguracion.TabIndex = 3;
             btnConfiguracion.Text = "Configuracion";
             btnConfiguracion.TextAlign = ContentAlignment.MiddleLeft;
@@ -132,26 +142,30 @@
             // 
             btnUsuario.BackColor = Color.Transparent;
             btnUsuario.Dock = DockStyle.Top;
+            btnUsuario.Enabled = true;
             btnUsuario.FlatAppearance.BorderSize = 0;
             btnUsuario.FlatStyle = FlatStyle.Flat;
             btnUsuario.Font = new Font("Segoe UI", 10F);
             btnUsuario.ForeColor = Color.Silver;
-            btnUsuario.Location = new Point(3, 335);
+            btnUsuario.Location = new Point(3, 247);
+            btnUsuario.Margin = new Padding(3, 2, 3, 2);
             btnUsuario.Name = "btnUsuario";
-            btnUsuario.Padding = new Padding(20, 0, 0, 0);
-            btnUsuario.Size = new Size(250, 62);
+            btnUsuario.Padding = new Padding(18, 0, 0, 0);
+            btnUsuario.Size = new Size(190, 46);
             btnUsuario.TabIndex = 4;
             btnUsuario.Text = "Usuario";
             btnUsuario.TextAlign = ContentAlignment.MiddleLeft;
             btnUsuario.UseVisualStyleBackColor = false;
+            btnUsuario.Click += btnUsuario_Click;
             // 
             // panel1
             // 
             panel1.BackColor = Color.Silver;
             panel1.Dock = DockStyle.Bottom;
-            panel1.Location = new Point(238, 590);
+            panel1.Location = new Point(208, 442);
+            panel1.Margin = new Padding(3, 2, 3, 2);
             panel1.Name = "panel1";
-            panel1.Size = new Size(862, 10);
+            panel1.Size = new Size(754, 8);
             panel1.TabIndex = 1;
             // 
             // lblKilos
@@ -159,9 +173,9 @@
             lblKilos.AutoSize = true;
             lblKilos.Font = new Font("Segoe UI", 25.8000011F, FontStyle.Bold, GraphicsUnit.Point, 0);
             lblKilos.ForeColor = SystemColors.ButtonFace;
-            lblKilos.Location = new Point(464, 274);
+            lblKilos.Location = new Point(406, 206);
             lblKilos.Name = "lblKilos";
-            lblKilos.Size = new Size(175, 60);
+            lblKilos.Size = new Size(141, 47);
             lblKilos.TabIndex = 2;
             lblKilos.Text = "1.45 kg";
             // 
@@ -169,9 +183,9 @@
             // 
             lblCapacidad.AutoSize = true;
             lblCapacidad.ForeColor = SystemColors.ButtonFace;
-            lblCapacidad.Location = new Point(525, 334);
+            lblCapacidad.Location = new Point(459, 250);
             lblCapacidad.Name = "lblCapacidad";
-            lblCapacidad.Size = new Size(58, 20);
+            lblCapacidad.Size = new Size(46, 15);
             lblCapacidad.TabIndex = 3;
             lblCapacidad.Text = "/ 2.0 kg";
             // 
@@ -183,16 +197,18 @@
             pnlContenido.Controls.Add(dispensarButton1);
             pnlContenido.Dock = DockStyle.Fill;
             pnlContenido.Location = new Point(0, 0);
+            pnlContenido.Margin = new Padding(3, 2, 3, 2);
             pnlContenido.Name = "pnlContenido";
-            pnlContenido.Size = new Size(1100, 600);
+            pnlContenido.Size = new Size(962, 450);
             pnlContenido.TabIndex = 5;
             pnlContenido.Paint += pnlContenido_Paint;
             // 
             // picMascota
             // 
-            picMascota.Location = new Point(909, 39);
+            picMascota.Location = new Point(795, 29);
+            picMascota.Margin = new Padding(3, 2, 3, 2);
             picMascota.Name = "picMascota";
-            picMascota.Size = new Size(116, 132);
+            picMascota.Size = new Size(102, 99);
             picMascota.TabIndex = 4;
             picMascota.TabStop = false;
             // 
@@ -203,23 +219,25 @@
             dispensarButton1.FlatStyle = FlatStyle.Flat;
             dispensarButton1.Font = new Font("Segoe UI Semibold", 11F);
             dispensarButton1.ForeColor = Color.White;
-            dispensarButton1.Location = new Point(440, 477);
+            dispensarButton1.Location = new Point(385, 358);
+            dispensarButton1.Margin = new Padding(3, 2, 3, 2);
             dispensarButton1.Name = "dispensarButton1";
-            dispensarButton1.Size = new Size(225, 62);
+            dispensarButton1.Size = new Size(197, 46);
             dispensarButton1.TabIndex = 0;
             dispensarButton1.Text = "Dispensar";
             dispensarButton1.UseVisualStyleBackColor = false;
             // 
             // Form1
             // 
-            AutoScaleDimensions = new SizeF(8F, 20F);
+            AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(26, 26, 27);
-            ClientSize = new Size(1100, 600);
+            ClientSize = new Size(962, 450);
             Controls.Add(panel1);
             Controls.Add(flowLayoutPanel1);
             Controls.Add(pnlContenido);
             FormBorderStyle = FormBorderStyle.None;
+            Margin = new Padding(3, 2, 3, 2);
             Name = "Form1";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Form1";
