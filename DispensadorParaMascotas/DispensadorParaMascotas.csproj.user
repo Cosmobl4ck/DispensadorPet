@@ -10,6 +10,9 @@
     <Compile Update="Views\Form1.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Update="Views\MascotaView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Update="Views\MenuButton.cs">
       <SubType>Component</SubType>
     </Compile>

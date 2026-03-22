@@ -10,13 +10,15 @@ namespace DispensadorParaMascotas
         {
             InitializeComponent();
             this.DoubleBuffered = true;
+
             pnlHeader.Paint += pnlHeader_Paint;
             pnlContenido.Invalidate();
         }
 
-        private enum Vista { Inicio, Programacion }
+        private enum Vista { Inicio, Programacion, Usuario }
         private Vista _vistaActual = Vista.Inicio;
         private ProgramacionView _programacionView;
+        private MascotaView _mascotaView;
 
         private double _kilosActuales = 1.45;
         private double _capacidadTotal = 2.0;
@@ -31,12 +33,21 @@ namespace DispensadorParaMascotas
             ConfigurarFotoPug();
             ReposicionarControles();
 
+            // Inicializar vistas
             _programacionView = new ProgramacionView { Visible = false };
+            _mascotaView = new MascotaView { Visible = false };
+
             pnlContenido.Controls.Add(_programacionView);
+            pnlContenido.Controls.Add(_mascotaView);
             pnlHeader.BringToFront();
 
+            // Conectar navegación
             btnInicio.Click += (s, ev) => MostrarVista(Vista.Inicio);
             btnProgramacion.Click += (s, ev) => MostrarVista(Vista.Programacion);
+            btnUsuario.Click += (s, ev) => MostrarVista(Vista.Usuario);
+
+            dispensarButton1.TabStop = false;
+            this.ActiveControl = null;
         }
 
         private void MostrarVista(Vista vista)
@@ -44,17 +55,27 @@ namespace DispensadorParaMascotas
             _vistaActual = vista;
 
             bool esInicio = vista == Vista.Inicio;
+            bool esUsuario = vista == Vista.Usuario;
+
+            // Visibilidad de controles del Inicio
             lblKilos.Visible = esInicio;
             lblCapacidad.Visible = esInicio;
             lblNivelComida.Visible = esInicio;
             dispensarButton1.Visible = esInicio;
-            _programacionView.Visible = vista == Vista.Programacion;
 
+            // Visibilidad de vistas
+            _programacionView.Visible = (vista == Vista.Programacion);
+            _mascotaView.Visible = esUsuario;
+
+            // El card de mascota NO aparece en la vista de registro
+            pnlHeader.Visible = !esUsuario;
+
+            // Colores del menú activo
             btnInicio.ForeColor = esInicio ? Color.FromArgb(0, 210, 200) : Color.Silver;
-            btnProgramacion.ForeColor = vista == Vista.Programacion ? Color.FromArgb(0, 210, 200) : Color.Silver;
+            btnProgramacion.ForeColor = (vista == Vista.Programacion) ? Color.FromArgb(0, 210, 200) : Color.Silver;
             btnHistorial.ForeColor = Color.Silver;
             btnConfiguracion.ForeColor = Color.Silver;
-            btnUsuario.ForeColor = Color.Silver;
+            btnUsuario.ForeColor = esUsuario ? Color.FromArgb(0, 210, 200) : Color.Silver;
 
             pnlContenido.Invalidate();
         }
@@ -207,6 +228,7 @@ namespace DispensadorParaMascotas
                     g.DrawPath(border, path);
             }
 
+            // Borde circular alrededor de la foto
             Point ptPhoto = pnlHeader.PointToClient(pbMascota.PointToScreen(Point.Empty));
             int margin = 3;
             using (Pen circlePen = new Pen(Color.FromArgb(0, 175, 165), 2.5f))
