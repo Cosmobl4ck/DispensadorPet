@@ -51,3 +51,6 @@ C:\Users\josue\source\repos\DispensadorPet\DispensadorParaMascotas\obj\Debug\net
 C:\Users\josue\source\repos\DispensadorPet\DispensadorParaMascotas\obj\Debug\net10.0-windows\ref\DispensadorParaMascotas.dll
 C:\Users\josue\source\repos\DispensadorPet\DispensadorParaMascotas\obj\Debug\net10.0-windows\DispensadorParaMascotas.Views.ProgramacionView.resources
 C:\Users\josue\source\repos\DispensadorPet\DispensadorParaMascotas\obj\Debug\net10.0-windows\DispensadorParaMascotas.Views.AñadirHorarioForm.resources
+C:\Users\Cosmoblack\source\repos\DispensadorPet\DispensadorParaMascotas\obj\Debug\net10.0-windows\DispensadorParaMascotas.Properties.Resources.resources
+C:\Users\Cosmoblack\source\repos\DispensadorPet\DispensadorParaMascotas\obj\Debug\net10.0-windows\DispensadorParaMascotas.Views.AñadirHorarioForm.resources
+C:\Users\Cosmoblack\source\repos\DispensadorPet\DispensadorParaMascotas\obj\Debug\net10.0-windows\DispensadorParaMascotas.Views.ProgramacionView.resources
