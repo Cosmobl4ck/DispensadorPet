@@ -104,7 +104,7 @@
             btnMostrar.FlatAppearance.BorderSize = 0;
             btnMostrar.FlatStyle = FlatStyle.Flat;
             btnMostrar.ForeColor = Color.FromArgb(0, 161, 156);
-            btnMostrar.Location = new Point(355, 214);
+            btnMostrar.Location = new Point(354, 298);
             btnMostrar.Name = "btnMostrar";
             btnMostrar.Size = new Size(22, 25);
             btnMostrar.TabIndex = 5;
@@ -124,7 +124,7 @@
             // 
             // tmrCarga
             // 
-            tmrCarga.Interval = 50;
+            tmrCarga.Tick += tmrCarga_Tick;
             // 
             // loginForm
             // 
