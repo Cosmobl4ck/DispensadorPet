@@ -1,6 +1,8 @@
+using DispensadorParaMascotas.Views;
+using Microsoft.Data.SqlClient;
+using System.Data;
 using System.Drawing;
 using System.Drawing.Drawing2D;
-using DispensadorParaMascotas.Views;
 
 namespace DispensadorParaMascotas
 {
@@ -9,6 +11,7 @@ namespace DispensadorParaMascotas
         public Form1()
         {
             InitializeComponent();
+            CargarDatosMascota();
             this.DoubleBuffered = true;
 
             pnlHeader.Paint += pnlHeader_Paint;
@@ -48,6 +51,34 @@ namespace DispensadorParaMascotas
 
             dispensarButton1.TabStop = false;
             this.ActiveControl = null;
+        }
+
+        private void CargarDatosMascota()
+        {
+            DatabaseHelper db = new DatabaseHelper();
+
+            // Consulta para traer los datos de la mascota del usuario logueado
+            string query = "SELECT nombre_mascota, edad_anos, peso_kg, altura_cm FROM MASCOTAS WHERE id_usuario = @userId";
+
+            SqlParameter[] parameters = {
+        new SqlParameter("@userId", DispensadorParaMascotas.Models.Sesion.UsuarioId)
+    };
+
+            DataTable dt = db.ExecuteQuery(query, parameters);
+
+            if (dt.Rows.Count > 0)
+            {
+                // El nombre de la mascota arriba
+                txtNombreMascota.Text = dt.Rows[0]["nombre_mascota"].ToString();
+
+               
+                txtEdad.Text = dt.Rows[0]["edad_anos"].ToString();   // Esto debería poner "3" (para Luna) o "1" (para Bolt)
+                txtPeso.Text = dt.Rows[0]["peso_kg"].ToString();    // Esto debería poner "8.50" o "15.20"
+                txtAltura.Text = dt.Rows[0]["altura_cm"].ToString(); // Si es nulo, aparecerá vacío
+
+                // El saludo 
+                lblSaludo.Text = $"¡Hola, {DispensadorParaMascotas.Models.Sesion.NombreUsuario}!";
+            }
         }
 
         private void MostrarVista(Vista vista)

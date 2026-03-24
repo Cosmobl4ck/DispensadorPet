@@ -3,10 +3,12 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
-using System.Text;
-using System.Windows.Forms;
 using System.Drawing.Drawing2D;
 using System.Runtime.InteropServices; // Necesario para personalizar el tema de la barra
+using System.Text;
+using System.Windows.Forms;
+using Microsoft.Data.SqlClient;
+using DispensadorParaMascotas.Models;
 
 namespace DispensadorParaMascotas
 {
@@ -84,21 +86,46 @@ namespace DispensadorParaMascotas
 
         private void btnSignIn_Click(object sender, EventArgs e)
         {
-            if (txtUsuario.Text == "Admin" && txtContrasena.Text == "12345")
+            // 1. Instanciamos el Helper
+            DatabaseHelper db = new DatabaseHelper();
+
+            // 2. Definimos la consulta
+            string query = "SELECT id_usuario FROM USUARIOS WHERE nombre_usuario = @user AND password_hash = @pass";
+
+            // 3. Parámetros seguros
+            SqlParameter[] parameters = {
+        new SqlParameter("@user", txtUsuario.Text.Trim()),
+        new SqlParameter("@pass", txtContrasena.Text)
+    };
+
+            // 4. Ejecutamos
+            DataTable result = db.ExecuteQuery(query, parameters);
+
+            // 5. Verificamos el resultado
+            if (result.Rows.Count > 0)
             {
+                // --- AQUÍ ESTÁ EL CAMBIO IMPORTANTE ---
+                // Guardamos los datos en la clase Sesion para que Form1 los conozca
+                Sesion.UsuarioId = Convert.ToInt32(result.Rows[0]["id_usuario"]);
+                Sesion.NombreUsuario = txtUsuario.Text.Trim();
+                // --------------------------------------
+
+                // --- INICIA TU ANIMACIÓN ---
                 prgCarga.Visible = true;
                 prgCarga.Value = 0;
                 btnSignIn.Enabled = false;
                 btnSignIn.Text = "Loading...";
 
-                tmrCarga.Interval = 50; // Velocidad de carga
+                tmrCarga.Interval = 20;
                 tmrCarga.Start();
             }
             else
             {
-                MessageBox.Show("Usuario o contraseña incorrectos.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Credenciales de base de datos incorrectas.", "Access Denied",
+                                MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
+
 
         private void tmrCarga_Tick(object sender, EventArgs e)
         {

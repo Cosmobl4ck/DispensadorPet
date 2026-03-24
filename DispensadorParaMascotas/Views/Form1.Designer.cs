@@ -43,19 +43,28 @@
             lblKilos = new Label();
             lblCapacidad = new Label();
             lblNivelComida = new Label();
-            lblNombreMascota = new Label();
+            txtNombreMascota = new Label();
             lblEstado = new Label();
             pnlContenido = new Panel();
+            lblSaludo = new Label();
+            txtAltura = new Label();
+            txtPeso = new Label();
+            txtEdad = new Label();
             pnlHeader = new Panel();
             tableLayoutPanel1 = new TableLayoutPanel();
             pbMascota = new PictureBox();
             dispensarButton1 = new DispensadorParaMascotas.Views.dispensarButton();
+            panel2 = new Panel();
+            label1 = new Label();
+            label2 = new Label();
+            label3 = new Label();
             pnlTitleBar.SuspendLayout();
             flowLayoutPanel1.SuspendLayout();
             pnlContenido.SuspendLayout();
             pnlHeader.SuspendLayout();
             tableLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pbMascota).BeginInit();
+            panel2.SuspendLayout();
             SuspendLayout();
             // 
             // pnlTitleBar
@@ -272,18 +281,18 @@
             lblNivelComida.TabIndex = 8;
             lblNivelComida.Text = "LEVEL DE COMIDA ACTUAL";
             // 
-            // lblNombreMascota
+            // txtNombreMascota
             // 
-            lblNombreMascota.Dock = DockStyle.Fill;
-            lblNombreMascota.Font = new Font("Segoe UI Semibold", 10F, FontStyle.Bold);
-            lblNombreMascota.ForeColor = Color.White;
-            lblNombreMascota.Location = new Point(98, 0);
-            lblNombreMascota.Name = "lblNombreMascota";
-            lblNombreMascota.Padding = new Padding(6, 0, 0, 0);
-            lblNombreMascota.Size = new Size(189, 52);
-            lblNombreMascota.TabIndex = 6;
-            lblNombreMascota.Text = "Mascota: Franky";
-            lblNombreMascota.TextAlign = ContentAlignment.BottomLeft;
+            txtNombreMascota.Dock = DockStyle.Fill;
+            txtNombreMascota.Font = new Font("Segoe UI Semibold", 10F, FontStyle.Bold);
+            txtNombreMascota.ForeColor = Color.White;
+            txtNombreMascota.Location = new Point(98, 0);
+            txtNombreMascota.Name = "txtNombreMascota";
+            txtNombreMascota.Padding = new Padding(6, 0, 0, 0);
+            txtNombreMascota.Size = new Size(189, 52);
+            txtNombreMascota.TabIndex = 6;
+            txtNombreMascota.Text = "Mascota: Franky";
+            txtNombreMascota.TextAlign = ContentAlignment.BottomLeft;
             // 
             // lblEstado
             // 
@@ -299,6 +308,8 @@
             // 
             // pnlContenido
             // 
+            pnlContenido.Controls.Add(panel2);
+            pnlContenido.Controls.Add(lblSaludo);
             pnlContenido.Controls.Add(pnlHeader);
             pnlContenido.Controls.Add(lblKilos);
             pnlContenido.Controls.Add(lblCapacidad);
@@ -311,6 +322,47 @@
             pnlContenido.Size = new Size(1060, 688);
             pnlContenido.TabIndex = 5;
             pnlContenido.Paint += pnlContenido_Paint;
+            // 
+            // lblSaludo
+            // 
+            lblSaludo.AutoSize = true;
+            lblSaludo.Font = new Font("Segoe UI Semibold", 14.25F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point, 0);
+            lblSaludo.ForeColor = SystemColors.ButtonHighlight;
+            lblSaludo.Location = new Point(376, 16);
+            lblSaludo.Name = "lblSaludo";
+            lblSaludo.Size = new Size(71, 25);
+            lblSaludo.TabIndex = 9;
+            lblSaludo.Text = "Saludo";
+            // 
+            // txtAltura
+            // 
+            txtAltura.AutoSize = true;
+            txtAltura.ForeColor = SystemColors.ButtonHighlight;
+            txtAltura.Location = new Point(180, 31);
+            txtAltura.Name = "txtAltura";
+            txtAltura.Size = new Size(39, 15);
+            txtAltura.TabIndex = 9;
+            txtAltura.Text = "Altura";
+            // 
+            // txtPeso
+            // 
+            txtPeso.AutoSize = true;
+            txtPeso.ForeColor = SystemColors.ButtonHighlight;
+            txtPeso.Location = new Point(104, 30);
+            txtPeso.Name = "txtPeso";
+            txtPeso.Size = new Size(32, 15);
+            txtPeso.TabIndex = 9;
+            txtPeso.Text = "Peso";
+            // 
+            // txtEdad
+            // 
+            txtEdad.AutoSize = true;
+            txtEdad.ForeColor = SystemColors.ButtonHighlight;
+            txtEdad.Location = new Point(28, 30);
+            txtEdad.Name = "txtEdad";
+            txtEdad.Size = new Size(33, 15);
+            txtEdad.TabIndex = 9;
+            txtEdad.Text = "Edad";
             // 
             // pnlHeader
             // 
@@ -327,7 +379,7 @@
             tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 95F));
             tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100F));
             tableLayoutPanel1.Controls.Add(pbMascota, 0, 0);
-            tableLayoutPanel1.Controls.Add(lblNombreMascota, 1, 0);
+            tableLayoutPanel1.Controls.Add(txtNombreMascota, 1, 0);
             tableLayoutPanel1.Controls.Add(lblEstado, 1, 1);
             tableLayoutPanel1.Dock = DockStyle.Fill;
             tableLayoutPanel1.Location = new Point(0, 0);
@@ -359,7 +411,7 @@
             dispensarButton1.FlatStyle = FlatStyle.Flat;
             dispensarButton1.Font = new Font("Segoe UI Semibold", 11F);
             dispensarButton1.ForeColor = Color.White;
-            dispensarButton1.Location = new Point(385, 400);
+            dispensarButton1.Location = new Point(385, 403);
             dispensarButton1.Margin = new Padding(3, 2, 3, 2);
             dispensarButton1.Name = "dispensarButton1";
             dispensarButton1.Size = new Size(210, 48);
@@ -368,6 +420,52 @@
             dispensarButton1.Text = "Dispensar";
             dispensarButton1.UseVisualStyleBackColor = false;
             dispensarButton1.Click += dispensarButton1_Click;
+            // 
+            // panel2
+            // 
+            panel2.Controls.Add(label3);
+            panel2.Controls.Add(label2);
+            panel2.Controls.Add(label1);
+            panel2.Controls.Add(txtAltura);
+            panel2.Controls.Add(txtPeso);
+            panel2.Controls.Add(txtEdad);
+            panel2.Location = new Point(741, 119);
+            panel2.Name = "panel2";
+            panel2.Size = new Size(289, 49);
+            panel2.TabIndex = 10;
+            // 
+            // label1
+            // 
+            label1.AutoSize = true;
+            label1.Font = new Font("Segoe UI", 10F);
+            label1.ForeColor = SystemColors.InactiveCaption;
+            label1.Location = new Point(28, 8);
+            label1.Name = "label1";
+            label1.Size = new Size(39, 19);
+            label1.TabIndex = 11;
+            label1.Text = "Edad";
+            // 
+            // label2
+            // 
+            label2.AutoSize = true;
+            label2.Font = new Font("Segoe UI", 10F);
+            label2.ForeColor = SystemColors.InactiveCaption;
+            label2.Location = new Point(104, 7);
+            label2.Name = "label2";
+            label2.Size = new Size(37, 19);
+            label2.TabIndex = 11;
+            label2.Text = "Peso";
+            // 
+            // label3
+            // 
+            label3.AutoSize = true;
+            label3.Font = new Font("Segoe UI", 10F);
+            label3.ForeColor = SystemColors.InactiveCaption;
+            label3.Location = new Point(180, 7);
+            label3.Name = "label3";
+            label3.Size = new Size(37, 19);
+            label3.TabIndex = 11;
+            label3.Text = "Peso";
             // 
             // Form1
             // 
@@ -392,6 +490,8 @@
             pnlHeader.ResumeLayout(false);
             tableLayoutPanel1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)pbMascota).EndInit();
+            panel2.ResumeLayout(false);
+            panel2.PerformLayout();
             ResumeLayout(false);
         }
 
@@ -406,7 +506,7 @@
         private Label lblKilos;
         private Label lblCapacidad;
         private Label lblNivelComida;
-        private Label lblNombreMascota;
+        private Label txtNombreMascota;
         private Label lblEstado;
         private Views.MenuButton btnInicio;
         private Views.MenuButton btnProgramacion;
@@ -418,5 +518,13 @@
         private PictureBox pbMascota;
         private Panel pnlHeader;
         private TableLayoutPanel tableLayoutPanel1;
+        public Label lblSaludo;
+        public Label txtAltura;
+        public Label txtPeso;
+        public Label txtEdad;
+        private Panel panel2;
+        private Label label3;
+        private Label label2;
+        private Label label1;
     }
 }

@@ -9,9 +9,18 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="vView\**" />
+    <EmbeddedResource Remove="vView\**" />
+    <None Remove="vView\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Folder Include="Controllers\" />
     <Folder Include="Controllers\" />
-    <Folder Include="vView\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Data.SqlClient" Version="7.0.0" />
   </ItemGroup>
 
   <ItemGroup>
