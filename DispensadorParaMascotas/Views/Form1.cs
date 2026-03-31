@@ -15,11 +15,13 @@ namespace DispensadorParaMascotas
             this.DoubleBuffered = true;
 
             pnlHeader.Paint += pnlHeader_Paint;
+            panel2.Paint += panel2_Paint;
             pnlContenido.Invalidate();
         }
 
         private enum Vista { Inicio, Programacion, Usuario }
         private Vista _vistaActual = Vista.Inicio;
+        private bool _saludoOculto = false;          // flag: el saludo ya se ocultó
         private ProgramacionView _programacionView;
         private MascotaView _mascotaView;
 
@@ -36,7 +38,6 @@ namespace DispensadorParaMascotas
             ConfigurarFotoPug();
             ReposicionarControles();
 
-            // Inicializar vistas
             _programacionView = new ProgramacionView { Visible = false };
             _mascotaView = new MascotaView { Visible = false };
 
@@ -44,39 +45,43 @@ namespace DispensadorParaMascotas
             pnlContenido.Controls.Add(_mascotaView);
             pnlHeader.BringToFront();
 
-            // Conectar navegación
             btnInicio.Click += (s, ev) => MostrarVista(Vista.Inicio);
             btnProgramacion.Click += (s, ev) => MostrarVista(Vista.Programacion);
             btnUsuario.Click += (s, ev) => MostrarVista(Vista.Usuario);
 
             dispensarButton1.TabStop = false;
             this.ActiveControl = null;
+
+            // Timer: oculta el saludo tras 5 segundos y no vuelve más
+            var timerSaludo = new System.Windows.Forms.Timer { Interval = 5000 };
+            timerSaludo.Tick += (s, ev) =>
+            {
+                _saludoOculto = true;
+                lblSaludo.Visible = false;
+                timerSaludo.Stop();
+                timerSaludo.Dispose();
+            };
+            timerSaludo.Start();
         }
 
         private void CargarDatosMascota()
         {
             DatabaseHelper db = new DatabaseHelper();
 
-            // Consulta para traer los datos de la mascota del usuario logueado
             string query = "SELECT nombre_mascota, edad_anos, peso_kg, altura_cm FROM MASCOTAS WHERE id_usuario = @userId";
 
             SqlParameter[] parameters = {
-        new SqlParameter("@userId", DispensadorParaMascotas.Models.Sesion.UsuarioId)
-    };
+                new SqlParameter("@userId", DispensadorParaMascotas.Models.Sesion.UsuarioId)
+            };
 
             DataTable dt = db.ExecuteQuery(query, parameters);
 
             if (dt.Rows.Count > 0)
             {
-                // El nombre de la mascota arriba
                 txtNombreMascota.Text = dt.Rows[0]["nombre_mascota"].ToString();
-
-               
-                txtEdad.Text = dt.Rows[0]["edad_anos"].ToString();   // Esto debería poner "3" (para Luna) o "1" (para Bolt)
-                txtPeso.Text = dt.Rows[0]["peso_kg"].ToString();    // Esto debería poner "8.50" o "15.20"
-                txtAltura.Text = dt.Rows[0]["altura_cm"].ToString(); // Si es nulo, aparecerá vacío
-
-                // El saludo 
+                txtEdad.Text = dt.Rows[0]["edad_anos"].ToString();
+                txtPeso.Text = dt.Rows[0]["peso_kg"].ToString();
+                txtAltura.Text = dt.Rows[0]["altura_cm"].ToString();
                 lblSaludo.Text = $"¡Hola, {DispensadorParaMascotas.Models.Sesion.NombreUsuario}!";
             }
         }
@@ -88,20 +93,20 @@ namespace DispensadorParaMascotas
             bool esInicio = vista == Vista.Inicio;
             bool esUsuario = vista == Vista.Usuario;
 
-            // Visibilidad de controles del Inicio
             lblKilos.Visible = esInicio;
             lblCapacidad.Visible = esInicio;
             lblNivelComida.Visible = esInicio;
             dispensarButton1.Visible = esInicio;
 
-            // Visibilidad de vistas
+            // El saludo solo aparece en Inicio Y solo si el timer aún no lo ocultó
+            lblSaludo.Visible = esInicio && !_saludoOculto;
+            panel2.Visible = esInicio;
+
             _programacionView.Visible = (vista == Vista.Programacion);
             _mascotaView.Visible = esUsuario;
 
-            // El card de mascota NO aparece en la vista de registro
             pnlHeader.Visible = !esUsuario;
 
-            // Colores del menú activo
             btnInicio.ForeColor = esInicio ? Color.FromArgb(0, 210, 200) : Color.Silver;
             btnProgramacion.ForeColor = (vista == Vista.Programacion) ? Color.FromArgb(0, 210, 200) : Color.Silver;
             btnHistorial.ForeColor = Color.Silver;
@@ -116,6 +121,7 @@ namespace DispensadorParaMascotas
             int cx = pnlContenido.Width / 2;
             int cy = pnlContenido.Height / 2 - 40;
 
+            // Gauge y botón
             lblKilos.Left = cx - lblKilos.Width / 2;
             lblKilos.Top = cy - 32;
 
@@ -128,8 +134,18 @@ namespace DispensadorParaMascotas
             dispensarButton1.Left = cx - dispensarButton1.Width / 2;
             dispensarButton1.Top = cy + 175;
 
+            // Card mascota — pegado a la esquina derecha
             pnlHeader.Left = pnlContenido.Width - pnlHeader.Width - 20;
             pnlHeader.Top = 16;
+
+            // panel2 alineado exactamente debajo del card, misma posición X y ancho
+            panel2.Left = pnlHeader.Left;
+            panel2.Width = pnlHeader.Width;
+            panel2.Top = pnlHeader.Bottom + 8;
+
+            // Saludo centrado horizontalmente, misma altura que antes
+            lblSaludo.Left = cx - lblSaludo.Width / 2;
+            lblSaludo.Top = 18;
         }
 
         private void pnlContenido_Paint(object sender, PaintEventArgs e)
@@ -142,7 +158,6 @@ namespace DispensadorParaMascotas
             int cx = pnlContenido.Width / 2;
             int cy = pnlContenido.Height / 2 - 40;
 
-            // --- DIMENSIONES ---
             int diametroInterno = 240;
             int xInt = cx - diametroInterno / 2;
             int yInt = cy - diametroInterno / 2;
@@ -156,16 +171,13 @@ namespace DispensadorParaMascotas
                 diametroInterno + margenExtra
             );
 
-            // Relleno oscuro interior
             using (SolidBrush bgBrush = new SolidBrush(Color.FromArgb(38, 38, 42)))
                 g.FillEllipse(bgBrush, rectInterno);
 
-            // --- 1. LÓGICA DEL CÍRCULO EXTERIOR (PLATEADO) ---
             Color colorPlataFondo = Color.FromArgb(55, 192, 192, 192);
-            Color colorPlataSolido = Color.FromArgb(200, 200, 200);
-
-            if (_nivelDeposito < 0.15)
-                colorPlataSolido = Color.FromArgb(255, 80, 80);
+            Color colorPlataSolido = _nivelDeposito < 0.15
+                ? Color.FromArgb(255, 80, 80)
+                : Color.FromArgb(200, 200, 200);
 
             using (Pen penFondoExt = new Pen(colorPlataFondo, 6))
                 g.DrawEllipse(penFondoExt, rectExterior);
@@ -178,17 +190,14 @@ namespace DispensadorParaMascotas
                 g.DrawArc(penPlata, rectExterior, -90, sweepExterior);
             }
 
-            // --- 2. CÍRCULO INTERNO (PETRONAS) ---
             using (Pen penFondo = new Pen(Color.FromArgb(50, 50, 55), 18))
                 g.DrawEllipse(penFondo, rectInterno);
 
             float sweepInterno = (float)(_porcentajeComida * 360);
 
-            // Glow Petronas
             using (Pen penGlow = new Pen(Color.FromArgb(55, 0, 161, 155), 28))
                 g.DrawArc(penGlow, rectInterno, -90, sweepInterno);
 
-            // Arco Petronas Sólido
             using (Pen penAqua = new Pen(Color.FromArgb(0, 161, 155), 18))
             {
                 penAqua.StartCap = LineCap.Round;
@@ -196,7 +205,6 @@ namespace DispensadorParaMascotas
                 g.DrawArc(penAqua, rectInterno, -90, sweepInterno);
             }
 
-            // Destello en la punta del arco
             double endRad = (-90.0 + sweepInterno) * Math.PI / 180.0;
             float tipX = cx + (diametroInterno / 2f) * (float)Math.Cos(endRad);
             float tipY = cy + (diametroInterno / 2f) * (float)Math.Sin(endRad);
@@ -211,7 +219,6 @@ namespace DispensadorParaMascotas
                 }
             }
 
-            // --- 3. GLOW DEL BOTÓN DISPENSAR ---
             int pad = 6;
             Rectangle btnRect = new Rectangle(
                 dispensarButton1.Left - pad,
@@ -259,13 +266,37 @@ namespace DispensadorParaMascotas
                     g.DrawPath(border, path);
             }
 
-            // Borde circular alrededor de la foto
             Point ptPhoto = pnlHeader.PointToClient(pbMascota.PointToScreen(Point.Empty));
             int margin = 3;
             using (Pen circlePen = new Pen(Color.FromArgb(0, 175, 165), 2.5f))
                 g.DrawEllipse(circlePen,
                     ptPhoto.X - margin, ptPhoto.Y - margin,
-                    pbMascota.Width + margin * 2, pbMascota.Height + margin * 2);
+                    pbMascota.Width + margin * 2,
+                    pbMascota.Height + margin * 2);
+        }
+
+        private void panel2_Paint(object sender, PaintEventArgs e)
+        {
+            var g = e.Graphics;
+            g.SmoothingMode = SmoothingMode.AntiAlias;
+
+            var rect = new Rectangle(0, 0, panel2.Width - 1, panel2.Height - 1);
+            int r = 10;
+
+            using (var path = new GraphicsPath())
+            {
+                path.AddArc(rect.X, rect.Y, r * 2, r * 2, 180, 90);
+                path.AddArc(rect.Right - r * 2, rect.Y, r * 2, r * 2, 270, 90);
+                path.AddArc(rect.Right - r * 2, rect.Bottom - r * 2, r * 2, r * 2, 0, 90);
+                path.AddArc(rect.X, rect.Bottom - r * 2, r * 2, r * 2, 90, 90);
+                path.CloseFigure();
+
+                using (var fill = new SolidBrush(Color.FromArgb(215, 36, 36, 40)))
+                    g.FillPath(fill, path);
+
+                using (var border = new Pen(Color.FromArgb(65, 65, 70), 1f))
+                    g.DrawPath(border, path);
+            }
         }
 
         private void ConfigurarFotoPug()

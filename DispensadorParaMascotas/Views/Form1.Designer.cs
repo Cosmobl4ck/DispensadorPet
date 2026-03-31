@@ -326,7 +326,7 @@
             // lblSaludo
             // 
             lblSaludo.AutoSize = true;
-            lblSaludo.Font = new Font("Segoe UI Semibold", 14.25F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point, 0);
+            lblSaludo.Font = new Font("Segoe UI Semibold", 20F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point, 0);
             lblSaludo.ForeColor = SystemColors.ButtonHighlight;
             lblSaludo.Location = new Point(376, 16);
             lblSaludo.Name = "lblSaludo";
@@ -431,8 +431,10 @@
             panel2.Controls.Add(txtEdad);
             panel2.Location = new Point(741, 119);
             panel2.Name = "panel2";
-            panel2.Size = new Size(289, 49);
+            panel2.Size = new Size(289, 64);
             panel2.TabIndex = 10;
+            panel2.BackColor = Color.Transparent;
+            panel2.Paint += panel2_Paint;
             // 
             // label1
             // 
@@ -465,7 +467,7 @@
             label3.Name = "label3";
             label3.Size = new Size(37, 19);
             label3.TabIndex = 11;
-            label3.Text = "Peso";
+            label3.Text = "Altura";
             // 
             // Form1
             // 
