@@ -1,30 +1,31 @@
 using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Windows.Forms;
+using System.IO;
 
 namespace DispensadorParaMascotas.Views
 {
     public class MascotaView : UserControl
     {
-        private PictureBox picFoto;
-        private Button btnSubirFoto;
-        private TextBox txtNombre;
-        private TextBox txtEdad;
-        private TextBox txtPeso;
-        private TextBox txtAltura;
-        private TextBox txtDueño;
-        private TextBox txtComida;
-        private Button btnGuardarDatos;
-        private Label lblTitulo;
-        private Label lblNombre;
-        private Label lblEdad;
-        private Label lblPeso;
-        private Label lblAltura;
-        private Label lblDueño;
-        private Label lblComida;
-        private Label lblFoto;
-        private Panel pnlFotoCard;
-        private Panel pnlDatosCard;
+        private PictureBox picFoto = null!;
+        private Button btnSubirFoto = null!;
+        private TextBox txtNombre = null!;
+        private TextBox txtEdad = null!;
+        private TextBox txtPeso = null!;
+        private TextBox txtAltura = null!;
+        private TextBox txtDueño = null!;
+        private TextBox txtComida = null!;
+        private Button btnGuardarDatos = null!;
+        private Label lblTitulo = null!;
+        private Label lblNombre = null!;
+        private Label lblEdad = null!;
+        private Label lblPeso = null!;
+        private Label lblAltura = null!;
+        private Label lblDueño = null!;
+        private Label lblComida = null!;
+        private Label lblFoto = null!;
+        private Panel pnlFotoCard = null!;
+        private Panel pnlDatosCard = null!;
 
         public MascotaView()
         {
@@ -36,7 +37,6 @@ namespace DispensadorParaMascotas.Views
 
         private void Construir()
         {
-            // ── Título ─────────────────────────────────────────────────────
             lblTitulo = new Label
             {
                 Text = "Mi Mascota",
@@ -46,7 +46,6 @@ namespace DispensadorParaMascotas.Views
                 Location = new Point(32, 28)
             };
 
-            // ── Card foto (izquierda) ──────────────────────────────────────
             pnlFotoCard = new Panel
             {
                 Location = new Point(32, 78),
@@ -95,7 +94,6 @@ namespace DispensadorParaMascotas.Views
 
             pnlFotoCard.Controls.AddRange(new Control[] { picFoto, lblFoto, btnSubirFoto });
 
-            // ── Card datos (derecha) ───────────────────────────────────────
             pnlDatosCard = new Panel
             {
                 Location = new Point(340, 78),
@@ -108,37 +106,31 @@ namespace DispensadorParaMascotas.Views
             int campo = 48;
             int y = 18;
 
-            // Nombre
             lblNombre = CrearLabel("Nombre", lx, y);
             y += 18;
             txtNombre = CrearTextBox(lx, y, 460);
             y += campo;
 
-            // Edad
             lblEdad = CrearLabel("Edad (años)", lx, y);
             y += 18;
             txtEdad = CrearTextBox(lx, y, 200);
             y += campo;
 
-            // Peso
             lblPeso = CrearLabel("Peso (kg)", lx, y);
             y += 18;
             txtPeso = CrearTextBox(lx, y, 200);
             y += campo;
 
-            // Altura
             lblAltura = CrearLabel("Altura (cm)", lx, y);
             y += 18;
             txtAltura = CrearTextBox(lx, y, 200);
             y += campo;
 
-            // Dueño
             lblDueño = CrearLabel("Dueño", lx, y);
             y += 18;
             txtDueño = CrearTextBox(lx, y, 460);
             y += campo;
 
-            // Comida
             lblComida = CrearLabel("Comida diaria (g)", lx, y);
             y += 18;
             txtComida = CrearTextBox(lx, y, 200);
@@ -153,7 +145,6 @@ namespace DispensadorParaMascotas.Views
                 lblComida, txtComida
             });
 
-            // ── Botón guardar ──────────────────────────────────────────────
             btnGuardarDatos = new Button
             {
                 Text = "Guardar Datos",
@@ -190,7 +181,6 @@ namespace DispensadorParaMascotas.Views
             pnlDatosCard.Location = new Point(margen + anchoFoto + 28, 78);
             pnlDatosCard.Size = new Size(anchoDatos, 340);
 
-            // Ajustar ancho de campos al nuevo ancho del card
             int anchoField = anchoDatos - 40;
             txtNombre.Width = anchoField;
             txtDueño.Width = anchoField;
@@ -200,7 +190,6 @@ namespace DispensadorParaMascotas.Views
                 pnlDatosCard.Bottom + 18);
         }
 
-        // ── Helpers ────────────────────────────────────────────────────────
         private static Label CrearLabel(string texto, int x, int y)
         {
             return new Label
@@ -264,7 +253,6 @@ namespace DispensadorParaMascotas.Views
             return path;
         }
 
-        // ── Eventos ────────────────────────────────────────────────────────
         private void PicFoto_Click(object sender, EventArgs e)
         {
             BtnSubirFoto_Click(sender, e);
@@ -294,7 +282,6 @@ namespace DispensadorParaMascotas.Views
                 return;
             }
 
-            // Aquí iría la lógica de persistencia (JSON/BD)
             MessageBox.Show(
                 $"Datos de {txtNombre.Text} guardados correctamente.",
                 "Guardado", MessageBoxButtons.OK, MessageBoxIcon.Information);

@@ -21,9 +21,11 @@ namespace DispensadorParaMascotas
 
         private enum Vista { Inicio, Programacion, Usuario }
         private Vista _vistaActual = Vista.Inicio;
-        private bool _saludoOculto = false;          // flag: el saludo ya se ocultó
-        private ProgramacionView _programacionView;
-        private MascotaView _mascotaView;
+        private bool _saludoOculto = false;
+
+        // ✅ FIX null warnings
+        private ProgramacionView _programacionView = null!;
+        private MascotaView _mascotaView = null!;
 
         private double _kilosActuales = 1.45;
         private double _capacidadTotal = 2.0;
@@ -33,7 +35,7 @@ namespace DispensadorParaMascotas
 
         private Point _dragStart;
 
-        private void Form1_Load(object sender, EventArgs e)
+        private void Form1_Load(object? sender, EventArgs e)
         {
             ConfigurarFotoPug();
             ReposicionarControles();
@@ -52,7 +54,6 @@ namespace DispensadorParaMascotas
             dispensarButton1.TabStop = false;
             this.ActiveControl = null;
 
-            // Timer: oculta el saludo tras 5 segundos y no vuelve más
             var timerSaludo = new System.Windows.Forms.Timer { Interval = 5000 };
             timerSaludo.Tick += (s, ev) =>
             {
@@ -78,10 +79,10 @@ namespace DispensadorParaMascotas
 
             if (dt.Rows.Count > 0)
             {
-                txtNombreMascota.Text = dt.Rows[0]["nombre_mascota"].ToString();
-                txtEdad.Text = dt.Rows[0]["edad_anos"].ToString();
-                txtPeso.Text = dt.Rows[0]["peso_kg"].ToString();
-                txtAltura.Text = dt.Rows[0]["altura_cm"].ToString();
+                txtNombreMascota.Text = dt.Rows[0]["nombre_mascota"]?.ToString() ?? "";
+                txtEdad.Text = dt.Rows[0]["edad_anos"]?.ToString() ?? "";
+                txtPeso.Text = dt.Rows[0]["peso_kg"]?.ToString() ?? "";
+                txtAltura.Text = dt.Rows[0]["altura_cm"]?.ToString() ?? "";
                 lblSaludo.Text = $"¡Hola, {DispensadorParaMascotas.Models.Sesion.NombreUsuario}!";
             }
         }
@@ -98,7 +99,6 @@ namespace DispensadorParaMascotas
             lblNivelComida.Visible = esInicio;
             dispensarButton1.Visible = esInicio;
 
-            // El saludo solo aparece en Inicio Y solo si el timer aún no lo ocultó
             lblSaludo.Visible = esInicio && !_saludoOculto;
             panel2.Visible = esInicio;
 
@@ -121,7 +121,6 @@ namespace DispensadorParaMascotas
             int cx = pnlContenido.Width / 2;
             int cy = pnlContenido.Height / 2 - 40;
 
-            // Gauge y botón
             lblKilos.Left = cx - lblKilos.Width / 2;
             lblKilos.Top = cy - 32;
 
@@ -134,21 +133,18 @@ namespace DispensadorParaMascotas
             dispensarButton1.Left = cx - dispensarButton1.Width / 2;
             dispensarButton1.Top = cy + 175;
 
-            // Card mascota — pegado a la esquina derecha
             pnlHeader.Left = pnlContenido.Width - pnlHeader.Width - 20;
             pnlHeader.Top = 16;
 
-            // panel2 alineado exactamente debajo del card, misma posición X y ancho
             panel2.Left = pnlHeader.Left;
             panel2.Width = pnlHeader.Width;
             panel2.Top = pnlHeader.Bottom + 8;
 
-            // Saludo centrado horizontalmente, misma altura que antes
             lblSaludo.Left = cx - lblSaludo.Width / 2;
             lblSaludo.Top = 18;
         }
 
-        private void pnlContenido_Paint(object sender, PaintEventArgs e)
+        private void pnlContenido_Paint(object? sender, PaintEventArgs e)
         {
             if (_vistaActual != Vista.Inicio) return;
 
@@ -204,46 +200,9 @@ namespace DispensadorParaMascotas
                 penAqua.EndCap = LineCap.Round;
                 g.DrawArc(penAqua, rectInterno, -90, sweepInterno);
             }
-
-            double endRad = (-90.0 + sweepInterno) * Math.PI / 180.0;
-            float tipX = cx + (diametroInterno / 2f) * (float)Math.Cos(endRad);
-            float tipY = cy + (diametroInterno / 2f) * (float)Math.Sin(endRad);
-            using (GraphicsPath tipPath = new GraphicsPath())
-            {
-                tipPath.AddEllipse(tipX - 8, tipY - 8, 16, 16);
-                using (PathGradientBrush tipBrush = new PathGradientBrush(tipPath))
-                {
-                    tipBrush.CenterColor = Color.FromArgb(220, 0, 230, 218);
-                    tipBrush.SurroundColors = new[] { Color.FromArgb(0, 0, 161, 155) };
-                    g.FillPath(tipBrush, tipPath);
-                }
-            }
-
-            int pad = 6;
-            Rectangle btnRect = new Rectangle(
-                dispensarButton1.Left - pad,
-                dispensarButton1.Top - pad,
-                dispensarButton1.Width + pad * 2,
-                dispensarButton1.Height + pad * 2
-            );
-            int r = 11;
-            using (GraphicsPath btnPath = new GraphicsPath())
-            {
-                btnPath.AddArc(btnRect.X, btnRect.Y, r * 2, r * 2, 180, 90);
-                btnPath.AddArc(btnRect.Right - r * 2, btnRect.Y, r * 2, r * 2, 270, 90);
-                btnPath.AddArc(btnRect.Right - r * 2, btnRect.Bottom - r * 2, r * 2, r * 2, 0, 90);
-                btnPath.AddArc(btnRect.X, btnRect.Bottom - r * 2, r * 2, r * 2, 90, 90);
-                btnPath.CloseFigure();
-
-                using (Pen glowOuter = new Pen(Color.FromArgb(70, 0, 210, 200), 5))
-                    g.DrawPath(glowOuter, btnPath);
-
-                using (Pen glowInner = new Pen(Color.FromArgb(0, 195, 185), 1.5f))
-                    g.DrawPath(glowInner, btnPath);
-            }
         }
 
-        private void pnlHeader_Paint(object sender, PaintEventArgs e)
+        private void pnlHeader_Paint(object? sender, PaintEventArgs e)
         {
             Graphics g = e.Graphics;
             g.SmoothingMode = SmoothingMode.AntiAlias;
@@ -265,17 +224,9 @@ namespace DispensadorParaMascotas
                 using (Pen border = new Pen(Color.FromArgb(65, 65, 70), 1f))
                     g.DrawPath(border, path);
             }
-
-            Point ptPhoto = pnlHeader.PointToClient(pbMascota.PointToScreen(Point.Empty));
-            int margin = 3;
-            using (Pen circlePen = new Pen(Color.FromArgb(0, 175, 165), 2.5f))
-                g.DrawEllipse(circlePen,
-                    ptPhoto.X - margin, ptPhoto.Y - margin,
-                    pbMascota.Width + margin * 2,
-                    pbMascota.Height + margin * 2);
         }
 
-        private void panel2_Paint(object sender, PaintEventArgs e)
+        private void panel2_Paint(object? sender, PaintEventArgs e)
         {
             var g = e.Graphics;
             g.SmoothingMode = SmoothingMode.AntiAlias;
@@ -307,7 +258,7 @@ namespace DispensadorParaMascotas
             pbMascota.SizeMode = PictureBoxSizeMode.Zoom;
         }
 
-        private void dispensarButton1_Click(object sender, EventArgs e)
+        private void dispensarButton1_Click(object? sender, EventArgs e)
         {
             if (_kilosActuales <= 0)
             {
@@ -324,13 +275,13 @@ namespace DispensadorParaMascotas
             pnlContenido.Invalidate();
         }
 
-        private void pnlTitleBar_MouseDown(object sender, MouseEventArgs e)
+        private void pnlTitleBar_MouseDown(object? sender, MouseEventArgs e)
         {
             if (e.Button == MouseButtons.Left)
                 _dragStart = e.Location;
         }
 
-        private void pnlTitleBar_MouseMove(object sender, MouseEventArgs e)
+        private void pnlTitleBar_MouseMove(object? sender, MouseEventArgs e)
         {
             if (e.Button == MouseButtons.Left)
                 this.Location = new Point(
@@ -339,12 +290,12 @@ namespace DispensadorParaMascotas
                 );
         }
 
-        private void btnMinimizar_Click(object sender, EventArgs e)
+        private void btnMinimizar_Click(object? sender, EventArgs e)
         {
             this.WindowState = FormWindowState.Minimized;
         }
 
-        private void btnCerrar_Click(object sender, EventArgs e)
+        private void btnCerrar_Click(object? sender, EventArgs e)
         {
             Application.Exit();
         }
