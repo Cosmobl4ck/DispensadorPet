@@ -71,7 +71,7 @@ namespace DispensadorParaMascotas
                 // El nombre de la mascota arriba
                 txtNombreMascota.Text = dt.Rows[0]["nombre_mascota"].ToString();
 
-               
+
                 txtEdad.Text = dt.Rows[0]["edad_anos"].ToString();   // Esto debería poner "3" (para Luna) o "1" (para Bolt)
                 txtPeso.Text = dt.Rows[0]["peso_kg"].ToString();    // Esto debería poner "8.50" o "15.20"
                 txtAltura.Text = dt.Rows[0]["altura_cm"].ToString(); // Si es nulo, aparecerá vacío
@@ -317,5 +317,20 @@ namespace DispensadorParaMascotas
         {
             Application.Exit();
         }
+
+        private void btnUsuario_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnSuscribirse_Click(object sender, EventArgs e)
+        {
+            Suscribirse ventanaRegistro = new Suscribirse();
+
+
+            ventanaRegistro.Show();
+
+            this.Hide(); 
+        }
     }
-}
+    }

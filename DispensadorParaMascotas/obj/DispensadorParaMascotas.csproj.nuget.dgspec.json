@@ -1,23 +1,23 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Cosmoblack\\source\\repos\\DispensadorPet\\DispensadorParaMascotas\\DispensadorParaMascotas.csproj": {}
+    "C:\\Users\\kathy\\OneDrive\\Documentos\\Dispensador-Pet-Proyecto\\DispensadorParaMascotas\\DispensadorParaMascotas.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Cosmoblack\\source\\repos\\DispensadorPet\\DispensadorParaMascotas\\DispensadorParaMascotas.csproj": {
+    "C:\\Users\\kathy\\OneDrive\\Documentos\\Dispensador-Pet-Proyecto\\DispensadorParaMascotas\\DispensadorParaMascotas.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Cosmoblack\\source\\repos\\DispensadorPet\\DispensadorParaMascotas\\DispensadorParaMascotas.csproj",
+        "projectUniqueName": "C:\\Users\\kathy\\OneDrive\\Documentos\\Dispensador-Pet-Proyecto\\DispensadorParaMascotas\\DispensadorParaMascotas.csproj",
         "projectName": "DispensadorParaMascotas",
-        "projectPath": "C:\\Users\\Cosmoblack\\source\\repos\\DispensadorPet\\DispensadorParaMascotas\\DispensadorParaMascotas.csproj",
-        "packagesPath": "C:\\Users\\Cosmoblack\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Cosmoblack\\source\\repos\\DispensadorPet\\DispensadorParaMascotas\\obj\\",
+        "projectPath": "C:\\Users\\kathy\\OneDrive\\Documentos\\Dispensador-Pet-Proyecto\\DispensadorParaMascotas\\DispensadorParaMascotas.csproj",
+        "packagesPath": "C:\\Users\\kathy\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\kathy\\OneDrive\\Documentos\\Dispensador-Pet-Proyecto\\DispensadorParaMascotas\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\Cosmoblack\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\kathy\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
@@ -26,7 +26,6 @@
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-          "C:\\Program Files\\dotnet\\library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {

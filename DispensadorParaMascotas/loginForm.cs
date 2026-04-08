@@ -1,4 +1,7 @@
-﻿using System;
+﻿using DispensadorParaMascotas.Models;
+using DispensadorParaMascotas.Views;
+using Microsoft.Data.SqlClient;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -7,13 +10,13 @@ using System.Drawing.Drawing2D;
 using System.Runtime.InteropServices; // Necesario para personalizar el tema de la barra
 using System.Text;
 using System.Windows.Forms;
-using Microsoft.Data.SqlClient;
-using DispensadorParaMascotas.Models;
 
 namespace DispensadorParaMascotas
 {
     public partial class loginForm : Form
     {
+        string connectionString = @"Data Source=(localdb)\MSSQLLocalDB; Initial Catalog=SmartPetDispenserDB; Integrated Security=True; TrustServerCertificate=True;";
+
         // Importación de librería para quitar el estilo verde de Windows
         [DllImport("uxtheme.dll", ExactSpelling = true, CharSet = CharSet.Unicode)]
         private static extern int SetWindowTheme(IntPtr hWnd, string pszSubAppName, string pszSubIdList);
@@ -22,6 +25,7 @@ namespace DispensadorParaMascotas
         Color colorPetronas = Color.FromArgb(0, 161, 156);
         Color colorOriginal = Color.FromArgb(64, 64, 64);
         int grosorLinea = 3;
+
 
         public loginForm()
         {
@@ -86,43 +90,43 @@ namespace DispensadorParaMascotas
 
         private void btnSignIn_Click(object sender, EventArgs e)
         {
-            // 1. Instanciamos el Helper
-            DatabaseHelper db = new DatabaseHelper();
+            // 1. Captura los datos de los TextBox del Login
+            string cuenta = txtUsuario.Text; // Aquí el usuario escribirá su 'Usuario' o 'Correo'
+            string password = txtContrasena.Text;
 
-            // 2. Definimos la consulta
-            string query = "SELECT id_usuario FROM USUARIOS WHERE nombre_usuario = @user AND password_hash = @pass";
+            // 2. Consulta que busca en ambas columnas
+            // Asegúrate de que "Contrasena" esté escrito exactamente como en tu tabla de SQL
+            string query = "SELECT COUNT(*) FROM Suscriptores WHERE (Usuario = @cuenta OR Correo = @cuenta) AND Contrasena = @pass";
 
-            // 3. Parámetros seguros
-            SqlParameter[] parameters = {
-        new SqlParameter("@user", txtUsuario.Text.Trim()),
-        new SqlParameter("@pass", txtContrasena.Text)
-    };
-
-            // 4. Ejecutamos
-            DataTable result = db.ExecuteQuery(query, parameters);
-
-            // 5. Verificamos el resultado
-            if (result.Rows.Count > 0)
+            try
             {
-                // --- AQUÍ ESTÁ EL CAMBIO IMPORTANTE ---
-                // Guardamos los datos en la clase Sesion para que Form1 los conozca
-                Sesion.UsuarioId = Convert.ToInt32(result.Rows[0]["id_usuario"]);
-                Sesion.NombreUsuario = txtUsuario.Text.Trim();
-                // --------------------------------------
+                using (SqlConnection con = new SqlConnection(connectionString))
+                {
+                    SqlCommand cmd = new SqlCommand(query, con);
+                    cmd.Parameters.AddWithValue("@cuenta", cuenta);
+                    cmd.Parameters.AddWithValue("@pass", password);
 
-                // --- INICIA TU ANIMACIÓN ---
-                prgCarga.Visible = true;
-                prgCarga.Value = 0;
-                btnSignIn.Enabled = false;
-                btnSignIn.Text = "Loading...";
+                    con.Open();
+                    int count = Convert.ToInt32(cmd.ExecuteScalar());
 
-                tmrCarga.Interval = 20;
-                tmrCarga.Start();
+                    if (count > 0)
+                    {
+                        MessageBox.Show("¡Bienvenido al sistema!");
+                        // Abre tu formulario principal aquí
+                        Form1 principal = new Form1();
+                        principal.Show();
+                        this.Hide();
+                    }
+                    else
+                    {
+                        // Este es el error que te sale en la imagen image_e5d61f.png
+                        MessageBox.Show("Credenciales incorrectas. Verifique su usuario y contraseña.");
+                    }
+                }
             }
-            else
+            catch (Exception ex)
             {
-                MessageBox.Show("Credenciales de base de datos incorrectas.", "Access Denied",
-                                MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Error de conexión: " + ex.Message);
             }
         }
 
@@ -193,5 +197,11 @@ namespace DispensadorParaMascotas
         }
 
         #endregion
+
+        private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            RecuperarContrasena ventanaRecuperar = new RecuperarContrasena();
+            ventanaRecuperar.ShowDialog(); 
+        }
     }
 }
