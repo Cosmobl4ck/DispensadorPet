@@ -3,3 +3,12 @@
 ################################################################################
 
 /.vs
+/DispensadorParaMascotas/obj/Debug/net8.0-windows/.NETCoreApp,Version=v8.0.AssemblyAttributes.cs
+/DispensadorParaMascotas/obj/Debug/net8.0-windows/DispensadorParaMascotas.AssemblyInfo.cs
+/DispensadorParaMascotas/obj/Debug/net8.0-windows/DispensadorParaMascotas.AssemblyInfoInputs.cache
+/DispensadorParaMascotas/obj/Debug/net8.0-windows/DispensadorParaMascotas.designer.deps.json
+/DispensadorParaMascotas/obj/Debug/net8.0-windows/DispensadorParaMascotas.designer.runtimeconfig.json
+/DispensadorParaMascotas/obj/Debug/net8.0-windows/DispensadorParaMascotas.GeneratedMSBuildEditorConfig.editorconfig
+/DispensadorParaMascotas/obj/Debug/net8.0-windows/DispensadorParaMascotas.GlobalUsings.g.cs
+/DispensadorParaMascotas/obj/Debug/net8.0-windows/DispensadorParaMascotas.assets.cache
+/DispensadorParaMascotas/obj/DispensadorParaMascotas.csproj.nuget.g.targets
