@@ -1201,19 +1201,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\josue\\.nuget\\packages\\": {}
+    "C:\\Users\\PC\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\josue\\source\\repos\\DispensadorPet\\DispensadorParaMascotas\\DispensadorParaMascotas.csproj",
+      "projectUniqueName": "C:\\Users\\PC\\source\\repos\\DispensadorPet\\DispensadorParaMascotas\\DispensadorParaMascotas.csproj",
       "projectName": "DispensadorParaMascotas",
-      "projectPath": "C:\\Users\\josue\\source\\repos\\DispensadorPet\\DispensadorParaMascotas\\DispensadorParaMascotas.csproj",
-      "packagesPath": "C:\\Users\\josue\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\josue\\source\\repos\\DispensadorPet\\DispensadorParaMascotas\\obj\\",
+      "projectPath": "C:\\Users\\PC\\source\\repos\\DispensadorPet\\DispensadorParaMascotas\\DispensadorParaMascotas.csproj",
+      "packagesPath": "C:\\Users\\PC\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\PC\\source\\repos\\DispensadorPet\\DispensadorParaMascotas\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\josue\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\PC\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
