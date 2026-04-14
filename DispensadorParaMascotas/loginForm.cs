@@ -46,6 +46,13 @@ namespace DispensadorParaMascotas
         {
             txtContrasena.UseSystemPasswordChar = true;
 
+            // --- CONFIGURACIÓN DEL LINKLABEL (COLORES) ---
+            linkLabel1.LinkColor = Color.White;                // Color normal (Blanco)
+            linkLabel1.VisitedLinkColor = Color.White;         // Color después de hacer clic (evita el morado)
+            linkLabel1.ActiveLinkColor = colorPetronas;        // Color cuando se presiona (Turquesa)
+            linkLabel1.LinkBehavior = LinkBehavior.HoverUnderline; // Quita el subrayado, solo aparece al pasar el mouse
+            // ----------------------------------------------
+
             // Configuración visual de la barra
             prgCarga.Style = ProgressBarStyle.Continuous;
             prgCarga.ForeColor = colorPetronas;
@@ -110,6 +117,7 @@ namespace DispensadorParaMascotas
                     int count = Convert.ToInt32(cmd.ExecuteScalar());
 
                     if (count > 0)
+
                     {
                         MessageBox.Show("¡Bienvenido al sistema!");
                         // Abre tu formulario principal aquí
@@ -117,14 +125,18 @@ namespace DispensadorParaMascotas
                         principal.Show();
                         this.Hide();
                     }
+
                     else
+
                     {
                         // Este es el error que te sale en la imagen image_e5d61f.png
                         MessageBox.Show("Credenciales incorrectas. Verifique su usuario y contraseña.");
                     }
                 }
             }
+
             catch (Exception ex)
+
             {
                 MessageBox.Show("Error de conexión: " + ex.Message);
             }
@@ -134,12 +146,15 @@ namespace DispensadorParaMascotas
         private void tmrCarga_Tick(object sender, EventArgs e)
         {
             if (prgCarga.Value < 100)
+
             {
                 prgCarga.Value += 5;
                 prgCarga.Refresh();
                 this.Update();
             }
+
             else
+
             {
                 tmrCarga.Stop();
                 Form1 principal = new Form1();
