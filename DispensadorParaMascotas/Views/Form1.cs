@@ -18,10 +18,11 @@ namespace DispensadorParaMascotas
             pnlContenido.Invalidate();
         }
 
-        private enum Vista { Inicio, Programacion, Usuario }
+        private enum Vista { Inicio, Programacion, Usuario, Suscribirse }
         private Vista _vistaActual = Vista.Inicio;
         private ProgramacionView _programacionView;
         private MascotaView _mascotaView;
+        private Suscribirse _suscribirseView;
 
         private double _kilosActuales = 1.45;
         private double _capacidadTotal = 2.0;
@@ -40,8 +41,11 @@ namespace DispensadorParaMascotas
             _programacionView = new ProgramacionView { Visible = false };
             _mascotaView = new MascotaView { Visible = false };
 
+
             pnlContenido.Controls.Add(_programacionView);
             pnlContenido.Controls.Add(_mascotaView);
+            _suscribirseView = new Suscribirse { Visible = false };
+            pnlContenido.Controls.Add(_suscribirseView);
             pnlHeader.BringToFront();
 
             // Conectar navegación
@@ -53,6 +57,8 @@ namespace DispensadorParaMascotas
             this.ActiveControl = null;
         }
 
+
+
         private void CargarDatosMascota()
         {
             DatabaseHelper db = new DatabaseHelper();
@@ -61,8 +67,7 @@ namespace DispensadorParaMascotas
             string query = "SELECT nombre_mascota, edad_anos, peso_kg, altura_cm FROM MASCOTAS WHERE id_usuario = @userId";
 
             SqlParameter[] parameters = {
-        new SqlParameter("@userId", DispensadorParaMascotas.Models.Sesion.UsuarioId)
-    };
+            new SqlParameter("@userId", DispensadorParaMascotas.Models.Sesion.UsuarioId)};
 
             DataTable dt = db.ExecuteQuery(query, parameters);
 
@@ -81,12 +86,15 @@ namespace DispensadorParaMascotas
             }
         }
 
+
+
         private void MostrarVista(Vista vista)
         {
             _vistaActual = vista;
 
             bool esInicio = vista == Vista.Inicio;
             bool esUsuario = vista == Vista.Usuario;
+            bool esSuscribirse = vista == Vista.Suscribirse;
 
             // Visibilidad de controles del Inicio
             lblKilos.Visible = esInicio;
@@ -97,9 +105,10 @@ namespace DispensadorParaMascotas
             // Visibilidad de vistas
             _programacionView.Visible = (vista == Vista.Programacion);
             _mascotaView.Visible = esUsuario;
+            _suscribirseView.Visible = esSuscribirse;
 
             // El card de mascota NO aparece en la vista de registro
-            pnlHeader.Visible = !esUsuario;
+            pnlHeader.Visible = !esUsuario && !esSuscribirse;
 
             // Colores del menú activo
             btnInicio.ForeColor = esInicio ? Color.FromArgb(0, 210, 200) : Color.Silver;
@@ -107,6 +116,7 @@ namespace DispensadorParaMascotas
             btnHistorial.ForeColor = Color.Silver;
             btnConfiguracion.ForeColor = Color.Silver;
             btnUsuario.ForeColor = esUsuario ? Color.FromArgb(0, 210, 200) : Color.Silver;
+            btnSuscribirse.ForeColor = esSuscribirse ? Color.FromArgb(0, 210, 200) : Color.Silver;
 
             pnlContenido.Invalidate();
         }
@@ -325,12 +335,12 @@ namespace DispensadorParaMascotas
 
         private void btnSuscribirse_Click(object sender, EventArgs e)
         {
-            Suscribirse ventanaRegistro = new Suscribirse();
-
-
-            ventanaRegistro.Show();
-
-            this.Hide(); 
+            MostrarVista(Vista.Suscribirse);
         }
-    }
-    }
+        public void BtnIrAlInicio()
+
+        {
+            MostrarVista(Vista.Inicio);
+        }
+    } 
+}

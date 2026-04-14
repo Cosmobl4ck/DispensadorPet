@@ -4,7 +4,7 @@ using Microsoft.Data.SqlClient; // La librería que instalamos
 
 namespace DispensadorParaMascotas.Views
 {
-    public partial class Suscribirse : Form
+    public partial class Suscribirse : UserControl
     {
         // Dirección de tu base de datos
         string connectionString = @"Data Source=(localdb)\MSSQLLocalDB; Initial Catalog=SmartPetDispenserDB; Integrated Security=True; TrustServerCertificate=True;";
@@ -53,9 +53,10 @@ namespace DispensadorParaMascotas.Views
 
                     MessageBox.Show("¡Suscripción exitosa! Bienvenido a SmartPet.", "Completado", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
-                    this.Hide();
-                    Form1 dashboard = new Form1();
-                    dashboard.Show();
+                    txtCelular.Clear(); txtCorreo.Clear();
+                    txtContrasena.Clear(); txtConfirmarContrasena.Clear();
+                    var form1 = this.FindForm() as Form1;
+                    form1?.BtnIrAlInicio();
                 }
             }
             catch (Exception ex)
@@ -138,9 +139,11 @@ namespace DispensadorParaMascotas.Views
 
                     MessageBox.Show("¡Suscripción exitosa! Bienvenido a SmartPet.", "Completado", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
-                    this.Hide();
-                    Form1 dashboard = new Form1();
-                    dashboard.Show();
+                    txtNombre.Clear(); txtApellido.Clear(); txtUsuario.Clear();
+                    txtCelular.Clear(); txtCorreo.Clear();
+                    txtContrasena.Clear(); txtConfirmarContrasena.Clear();
+                    var form1 = this.FindForm() as Form1;
+                    form1?.BtnIrAlInicio();
                 }
             }
             catch (Exception ex)

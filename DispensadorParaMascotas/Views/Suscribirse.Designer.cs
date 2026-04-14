@@ -1,6 +1,6 @@
 ﻿namespace DispensadorParaMascotas.Views
 {
-    partial class Suscribirse
+    partial class Suscribirse : UserControl
     {
         /// <summary>
         /// Required designer variable.
@@ -22,7 +22,7 @@
 
         private dispensarButton GetBtnCrear()
         {
-            return btnCrear;
+            return Crear_Suscripcion;
         }
 
         #region Windows Form Designer generated code
@@ -271,7 +271,7 @@
             AutoScaleDimensions = new SizeF(10F, 25F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(26, 26, 27);
-            ClientSize = new Size(839, 845);
+            Size = new Size(839, 845);
             Controls.Add(Crear_Suscripcion);
             Controls.Add(label8);
             Controls.Add(txtUsuario);
@@ -291,9 +291,9 @@
             Controls.Add(txtNombre);
             Controls.Add(label1);
             Controls.Add(pictureBox1);
-            FormBorderStyle = FormBorderStyle.None;
+            
             Name = "Suscribirse";
-            SizeGripStyle = SizeGripStyle.Hide;
+            
             Text = "Suscribirse";
             Load += Suscribirse_Load;
             ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
@@ -313,7 +313,7 @@
         private TextBox txtCelular;
         private Label label5;
         private TextBox txtCorreo;
-        private dispensarButton btnCrear;
+        private dispensarButton Crear_Suscripcion;
         private LinkLabel linkLabel1;
         private PictureBox pictureBox1;
         private PictureBox pictureBox2;
@@ -323,6 +323,6 @@
         private TextBox txtConfirmarContrasena;
         private Label label8;
         private TextBox txtUsuario;
-        private dispensarButton Crear_Suscripcion;
+        
     }
 }

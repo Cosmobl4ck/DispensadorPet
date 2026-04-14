@@ -52,6 +52,8 @@ C:\Users\PC\source\repos\DispensadorPet\DispensadorParaMascotas\obj\Debug\net8.0
 C:\Users\PC\source\repos\DispensadorPet\DispensadorParaMascotas\obj\Debug\net8.0-windows\DispensadorParaMascotas.Form1.resources
 C:\Users\PC\source\repos\DispensadorPet\DispensadorParaMascotas\obj\Debug\net8.0-windows\DispensadorParaMascotas.Views.MascotaView.resources
 C:\Users\PC\source\repos\DispensadorPet\DispensadorParaMascotas\obj\Debug\net8.0-windows\DispensadorParaMascotas.Views.ProgramacionView.resources
+C:\Users\PC\source\repos\DispensadorPet\DispensadorParaMascotas\obj\Debug\net8.0-windows\DispensadorParaMascotas.Views.RecuperarContrasena.resources
+C:\Users\PC\source\repos\DispensadorPet\DispensadorParaMascotas\obj\Debug\net8.0-windows\DispensadorParaMascotas.Views.Suscribirse.resources
 C:\Users\PC\source\repos\DispensadorPet\DispensadorParaMascotas\obj\Debug\net8.0-windows\DispensadorParaMascotas.csproj.GenerateResource.cache
 C:\Users\PC\source\repos\DispensadorPet\DispensadorParaMascotas\obj\Debug\net8.0-windows\DispensadorParaMascotas.GeneratedMSBuildEditorConfig.editorconfig
 C:\Users\PC\source\repos\DispensadorPet\DispensadorParaMascotas\obj\Debug\net8.0-windows\DispensadorParaMascotas.AssemblyInfoInputs.cache
@@ -64,5 +66,3 @@ C:\Users\PC\source\repos\DispensadorPet\DispensadorParaMascotas\obj\Debug\net8.0
 C:\Users\PC\source\repos\DispensadorPet\DispensadorParaMascotas\obj\Debug\net8.0-windows\DispensadorParaMascotas.pdb
 C:\Users\PC\source\repos\DispensadorPet\DispensadorParaMascotas\obj\Debug\net8.0-windows\DispensadorParaMascotas.genruntimeconfig.cache
 C:\Users\PC\source\repos\DispensadorPet\DispensadorParaMascotas\obj\Debug\net8.0-windows\ref\DispensadorParaMascotas.dll
-C:\Users\PC\source\repos\DispensadorPet\DispensadorParaMascotas\obj\Debug\net8.0-windows\DispensadorParaMascotas.Views.RecuperarContrasena.resources
-C:\Users\PC\source\repos\DispensadorPet\DispensadorParaMascotas\obj\Debug\net8.0-windows\DispensadorParaMascotas.Views.Suscribirse.resources
