@@ -258,7 +258,7 @@
             Crear_Suscripcion.FlatStyle = FlatStyle.Flat;
             Crear_Suscripcion.Font = new Font("Segoe UI Semibold", 11F);
             Crear_Suscripcion.ForeColor = Color.White;
-            Crear_Suscripcion.Location = new Point(653, 757);
+            Crear_Suscripcion.Location = new Point(120, 600);
             Crear_Suscripcion.Name = "Crear_Suscripcion";
             Crear_Suscripcion.Size = new Size(111, 37);
             Crear_Suscripcion.TabIndex = 21;

@@ -139,9 +139,14 @@ namespace DispensadorParaMascotas.Views
 
                     MessageBox.Show("¡Suscripción exitosa! Bienvenido a SmartPet.", "Completado", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
-                    txtNombre.Clear(); txtApellido.Clear(); txtUsuario.Clear();
-                    txtCelular.Clear(); txtCorreo.Clear();
-                    txtContrasena.Clear(); txtConfirmarContrasena.Clear();
+                    txtNombre.Clear(); 
+                    txtApellido.Clear(); 
+                    txtUsuario.Clear();
+                    txtCelular.Clear(); 
+                    txtCorreo.Clear();
+                    txtContrasena.Clear(); 
+                    txtConfirmarContrasena.Clear();
+
                     var form1 = this.FindForm() as Form1;
                     form1?.BtnIrAlInicio();
                 }
