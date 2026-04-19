@@ -7,11 +7,17 @@
     <Compile Update="Views\AñadirHorarioForm.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Update="Views\ConfiguracionView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Update="Views\dispensarButton.cs">
       <SubType>Component</SubType>
     </Compile>
     <Compile Update="Views\Form1.cs">
       <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Views\HistorialView.cs">
+      <SubType>UserControl</SubType>
     </Compile>
     <Compile Update="Views\MascotaView.cs">
       <SubType>UserControl</SubType>
