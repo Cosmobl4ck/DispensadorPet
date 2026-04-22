@@ -1201,24 +1201,27 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\josue\\.nuget\\packages\\": {}
+    "C:\\Users\\PC GAMER\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\josue\\source\\repos\\DispensadorPet\\DispensadorParaMascotas\\DispensadorParaMascotas.csproj",
+      "projectUniqueName": "C:\\Users\\PC GAMER\\source\\repos\\DispensadorPet\\DispensadorParaMascotas\\DispensadorParaMascotas.csproj",
       "projectName": "DispensadorParaMascotas",
-      "projectPath": "C:\\Users\\josue\\source\\repos\\DispensadorPet\\DispensadorParaMascotas\\DispensadorParaMascotas.csproj",
-      "packagesPath": "C:\\Users\\josue\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\josue\\source\\repos\\DispensadorPet\\DispensadorParaMascotas\\obj\\",
+      "projectPath": "C:\\Users\\PC GAMER\\source\\repos\\DispensadorPet\\DispensadorParaMascotas\\DispensadorParaMascotas.csproj",
+      "packagesPath": "C:\\Users\\PC GAMER\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\PC GAMER\\source\\repos\\DispensadorPet\\DispensadorParaMascotas\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\josue\\AppData\\Roaming\\NuGet\\NuGet.Config"
+        "C:\\Users\\PC GAMER\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
         "net8.0-windows"
       ],
       "sources": {
+        "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+        "C:\\Program Files\\dotnet\\library-packs": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
