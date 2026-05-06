@@ -7,7 +7,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Drawing.Drawing2D;
-using System.Runtime.InteropServices; // Necesario para personalizar el tema de la barra
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Windows.Forms;
 
@@ -17,43 +17,38 @@ namespace DispensadorParaMascotas
     {
         string connectionString = @"Data Source=(localdb)\MSSQLLocalDB; Initial Catalog=SmartPetDispenserDB; Integrated Security=True; TrustServerCertificate=True;";
 
-        // Importación de librería para quitar el estilo verde de Windows
         [DllImport("uxtheme.dll", ExactSpelling = true, CharSet = CharSet.Unicode)]
         private static extern int SetWindowTheme(IntPtr hWnd, string pszSubAppName, string pszSubIdList);
 
-        // Variables de Estilo Petronas
         Color colorPetronas = Color.FromArgb(0, 161, 156);
         Color colorOriginal = Color.FromArgb(64, 64, 64);
         int grosorLinea = 3;
-
 
         public loginForm()
         {
             InitializeComponent();
             this.ResizeRedraw = true;
+            this.AcceptButton = btnSignIn; // Enter dispara el login desde cualquier campo
         }
 
-        // Este método se ejecuta cuando se crea el control, ideal para forzar colores
         protected override void OnHandleCreated(EventArgs e)
         {
             base.OnHandleCreated(e);
-            // Esto desactiva el diseño "brillante" de Windows solo para la barra de progreso
-            // permitiendo que el ForeColor (Petronas) se vea correctamente.
             SetWindowTheme(prgCarga.Handle, "", "");
         }
 
         private void loginForm_Load(object sender, EventArgs e)
         {
             txtContrasena.UseSystemPasswordChar = true;
+            // Fix: sin esto los TextBox arrancan blancos (SystemColors.Window por defecto)
+            txtUsuario.BackColor = colorOriginal;
+            txtContrasena.BackColor = colorOriginal;
 
-            // --- CONFIGURACIÓN DEL LINKLABEL (COLORES) ---
-            linkLabel1.LinkColor = Color.White;                // Color normal (Blanco)
-            linkLabel1.VisitedLinkColor = Color.White;         // Color después de hacer clic (evita el morado)
-            linkLabel1.ActiveLinkColor = colorPetronas;        // Color cuando se presiona (Turquesa)
-            linkLabel1.LinkBehavior = LinkBehavior.HoverUnderline; // Quita el subrayado, solo aparece al pasar el mouse
-            // ----------------------------------------------
+            linkLabel1.LinkColor = Color.White;
+            linkLabel1.VisitedLinkColor = Color.White;
+            linkLabel1.ActiveLinkColor = colorPetronas;
+            linkLabel1.LinkBehavior = LinkBehavior.HoverUnderline;
 
-            // Configuración visual de la barra
             prgCarga.Style = ProgressBarStyle.Continuous;
             prgCarga.ForeColor = colorPetronas;
             prgCarga.BackColor = Color.FromArgb(45, 45, 45);
@@ -97,12 +92,9 @@ namespace DispensadorParaMascotas
 
         private void btnSignIn_Click(object sender, EventArgs e)
         {
-            // 1. Captura los datos de los TextBox del Login
-            string cuenta = txtUsuario.Text; // Aquí el usuario escribirá su 'Usuario' o 'Correo'
+            string cuenta = txtUsuario.Text;
             string password = txtContrasena.Text;
 
-            // 2. Consulta que busca en ambas columnas
-            // Asegúrate de que "Contrasena" esté escrito exactamente como en tu tabla de SQL
             string query = "SELECT COUNT(*) FROM Suscriptores WHERE (Usuario = @cuenta OR Correo = @cuenta) AND Contrasena = @pass";
 
             try
@@ -117,44 +109,33 @@ namespace DispensadorParaMascotas
                     int count = Convert.ToInt32(cmd.ExecuteScalar());
 
                     if (count > 0)
-
                     {
                         MessageBox.Show("¡Bienvenido al sistema!");
-                        // Abre tu formulario principal aquí
                         Form1 principal = new Form1();
                         principal.Show();
                         this.Hide();
                     }
-
                     else
-
                     {
-                        // Este es el error que te sale en la imagen image_e5d61f.png
                         MessageBox.Show("Credenciales incorrectas. Verifique su usuario y contraseña.");
                     }
                 }
             }
-
             catch (Exception ex)
-
             {
                 MessageBox.Show("Error de conexión: " + ex.Message);
             }
         }
 
-
         private void tmrCarga_Tick(object sender, EventArgs e)
         {
             if (prgCarga.Value < 100)
-
             {
                 prgCarga.Value += 5;
                 prgCarga.Refresh();
                 this.Update();
             }
-
             else
-
             {
                 tmrCarga.Stop();
                 Form1 principal = new Form1();
@@ -216,7 +197,7 @@ namespace DispensadorParaMascotas
         private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             RecuperarContrasena ventanaRecuperar = new RecuperarContrasena();
-            ventanaRecuperar.ShowDialog(); 
+            ventanaRecuperar.ShowDialog();
         }
     }
 }

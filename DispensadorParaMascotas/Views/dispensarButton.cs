@@ -13,6 +13,10 @@ namespace DispensadorParaMascotas.Views
         private Color colorAqua = Color.FromArgb(0, 161, 155);
         private Color colorGrisOscuro = Color.FromArgb(45, 45, 48);
 
+        // Animación suave
+        private float _hoverProgress = 0f;
+        private System.Windows.Forms.Timer _animTimer;
+
         public dispensarButton()
         {
             this.Size = new Size(180, 50);
@@ -24,9 +28,19 @@ namespace DispensadorParaMascotas.Views
             this.Text = "DISPENSAR";
             this.Cursor = Cursors.Hand;
 
-            // Eventos para el efecto visual
-            this.MouseEnter += (s, e) => { isHovering = true; Invalidate(); };
-            this.MouseLeave += (s, e) => { isHovering = false; Invalidate(); };
+            // Timer a ~60fps para la transición suave
+            _animTimer = new System.Windows.Forms.Timer { Interval = 16 };
+            _animTimer.Tick += (s, e) =>
+            {
+                float target = isHovering ? 1f : 0f;
+                float diff = target - _hoverProgress;
+                if (Math.Abs(diff) < 0.02f) { _hoverProgress = target; _animTimer.Stop(); }
+                else _hoverProgress += diff * 0.18f;
+                Invalidate();
+            };
+
+            this.MouseEnter += (s, e) => { isHovering = true; _animTimer.Start(); };
+            this.MouseLeave += (s, e) => { isHovering = false; _animTimer.Start(); };
         }
 
         protected override void OnPaint(PaintEventArgs pevent)
@@ -44,20 +58,22 @@ namespace DispensadorParaMascotas.Views
             path.AddArc(rect.X, rect.Height - radius, radius, radius, 90, 90);
             path.CloseFigure();
 
-            // 2. Dibujar fondo con degradado metálico
+            // 2. Fondo con leve iluminación al hover
+            int glow = (int)(20 * _hoverProgress);
             using (LinearGradientBrush brush = new LinearGradientBrush(rect,
-                Color.FromArgb(60, 60, 60), Color.FromArgb(30, 30, 30), 90F))
+                Color.FromArgb(60 + glow, 60 + glow, 60 + glow), Color.FromArgb(30, 30, 30), 90F))
             {
                 g.FillPath(brush, path);
             }
 
-            // 3. Dibujar borde con brillo Aqua Petronas
-            using (Pen penAqua = new Pen(isHovering ? colorAqua : Color.FromArgb(100, colorAqua), 2))
+            // 3. Borde Aqua animado (alpha de 80 a 255)
+            int borderAlpha = (int)(80 + 175 * _hoverProgress);
+            using (Pen penAqua = new Pen(Color.FromArgb(borderAlpha, colorAqua), 2))
             {
                 g.DrawPath(penAqua, path);
             }
 
-            // 4. Dibujar el texto centrado
+            // 4. Texto centrado
             TextRenderer.DrawText(g, this.Text, this.Font, rect, this.ForeColor,
                 TextFormatFlags.HorizontalCenter | TextFormatFlags.VerticalCenter);
         }

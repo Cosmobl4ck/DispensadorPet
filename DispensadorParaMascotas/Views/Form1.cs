@@ -15,6 +15,7 @@ namespace DispensadorParaMascotas
             this.DoubleBuffered = true;
 
             pnlHeader.Paint += pnlHeader_Paint;
+            panel2.Paint += panel2_Paint;
             pnlContenido.Invalidate();
         }
 
@@ -420,6 +421,40 @@ namespace DispensadorParaMascotas
                 g.DrawEllipse(circlePen,
                     ptPhoto.X - margin, ptPhoto.Y - margin,
                     pbMascota.Width + margin * 2, pbMascota.Height + margin * 2);
+        }
+
+        private void panel2_Paint(object sender, PaintEventArgs e)
+        {
+            Graphics g = e.Graphics;
+            g.SmoothingMode = SmoothingMode.AntiAlias;
+
+            Rectangle rect = new Rectangle(0, 0, panel2.Width - 1, panel2.Height - 1);
+            int radius = 14;
+
+            using (GraphicsPath path = new GraphicsPath())
+            {
+                path.AddArc(rect.X, rect.Y, radius * 2, radius * 2, 180, 90);
+                path.AddArc(rect.Right - radius * 2, rect.Y, radius * 2, radius * 2, 270, 90);
+                path.AddArc(rect.Right - radius * 2, rect.Bottom - radius * 2, radius * 2, radius * 2, 0, 90);
+                path.AddArc(rect.X, rect.Bottom - radius * 2, radius * 2, radius * 2, 90, 90);
+                path.CloseFigure();
+
+                // Mismo fondo que pnlHeader
+                using (SolidBrush fill = new SolidBrush(Color.FromArgb(215, 36, 36, 40)))
+                    g.FillPath(fill, path);
+
+                using (Pen border = new Pen(Color.FromArgb(65, 65, 70), 1f))
+                    g.DrawPath(border, path);
+            }
+
+            // Separadores verticales entre las 3 stats
+            using (Pen sep = new Pen(Color.FromArgb(65, 65, 70), 1))
+            {
+                int tercio1 = panel2.Width / 3;
+                int tercio2 = (panel2.Width / 3) * 2;
+                g.DrawLine(sep, tercio1, 14, tercio1, panel2.Height - 14);
+                g.DrawLine(sep, tercio2, 14, tercio2, panel2.Height - 14);
+            }
         }
 
         private void ConfigurarFotoPug()

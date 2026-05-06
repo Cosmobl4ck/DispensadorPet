@@ -2,15 +2,8 @@
 {
     partial class loginForm
     {
-        /// <summary>
-        /// Required designer variable.
-        /// </summary>
         private System.ComponentModel.IContainer components = null;
 
-        /// <summary>
-        /// Clean up any resources being used.
-        /// </summary>
-        /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
         protected override void Dispose(bool disposing)
         {
             if (disposing && (components != null))
@@ -22,10 +15,6 @@
 
         #region Windows Form Designer generated code
 
-        /// <summary>
-        /// Required method for Designer support - do not modify
-        /// the contents of this method with the code editor.
-        /// </summary>
         private void InitializeComponent()
         {
             components = new System.ComponentModel.Container();
@@ -47,7 +36,7 @@
             btnSignIn.FlatStyle = FlatStyle.Flat;
             btnSignIn.Font = new Font("Segoe UI Semibold", 11F);
             btnSignIn.ForeColor = Color.White;
-            btnSignIn.Location = new Point(162, 475);
+            btnSignIn.Location = new Point(162, 455);
             btnSignIn.Margin = new Padding(4);
             btnSignIn.Name = "btnSignIn";
             btnSignIn.Size = new Size(220, 46);
@@ -122,7 +111,7 @@
             // prgCarga
             // 
             prgCarga.ForeColor = Color.FromArgb(0, 161, 156);
-            prgCarga.Location = new Point(118, 554);
+            prgCarga.Location = new Point(118, 534);
             prgCarga.Margin = new Padding(4);
             prgCarga.Name = "prgCarga";
             prgCarga.Size = new Size(308, 29);
@@ -137,7 +126,7 @@
             // linkLabel1
             // 
             linkLabel1.AutoSize = true;
-            linkLabel1.Location = new Point(175, 661);
+            linkLabel1.Location = new Point(175, 588);
             linkLabel1.Name = "linkLabel1";
             linkLabel1.Size = new Size(214, 25);
             linkLabel1.TabIndex = 7;
@@ -150,7 +139,7 @@
             AutoScaleDimensions = new SizeF(10F, 25F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(26, 26, 27);
-            ClientSize = new Size(564, 714);
+            ClientSize = new Size(564, 640);
             Controls.Add(linkLabel1);
             Controls.Add(prgCarga);
             Controls.Add(btnMostrar);
